@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 enum FaceDetectionState {
-    case NotRecognized, GotFace, DiscoveredOnFacebook;
+    case NotRecognized, GotFace, TooManyFaces;
 }
 
 class MainViewController:UIViewController {
@@ -85,6 +85,7 @@ class MainViewController:UIViewController {
             }
         } else if detectedFaces.count > 1 {
             NSLog("Too many faces! \(detectedFaces.count)", "");
+            self.state = .TooManyFaces
         }
     }
     var facesDetected = 0
@@ -115,7 +116,8 @@ class MainViewController:UIViewController {
             self.faceView.hidden = true;
             self.confidenceLabel.text = "No one in range"
             self.nameLabel.text = "Hi stranger! Take a look!"
-            
+        case .TooManyFaces:
+            self.confidenceLabel.text = "Too many faces in front!"
         case .GotFace:
             self.gotFace()
             self.confidenceLabel.text = ""
@@ -164,7 +166,7 @@ class MainViewController:UIViewController {
     }
     
     func confidenceFound(confidence:Double, face:UIImage, grayFace:UIImage, var identifier:String) {
-        if confidence > 120 {
+        if confidence > 150 {
             self.createPerson(face, grayFace:grayFace, callback:{ [weak self] (face) -> () in
                 self?.gotFaceModel(face)
             })
