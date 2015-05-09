@@ -47,6 +47,7 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         self.carousel.dataSource = self
         self.carousel.delegate = self
         self.carousel.type = .Rotary
+        self.nextOne()
         
         self.faceRecognizer = FJFaceRecognizer()
         
@@ -210,6 +211,19 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
     }
     
     // MARK - iCarousel
+    func reloadData() {
+        carousel.reloadData()
+        
+    }
+    
+    func nextOne() {
+        carousel.scrollByNumberOfItems(1, duration: 0.3)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW,
+            Int64(3 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) { () -> Void in
+            self.nextOne()
+        }
+    }
     
     func numberOfItemsInCarousel(carousel: iCarousel!) -> Int
     {
