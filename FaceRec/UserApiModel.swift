@@ -14,6 +14,7 @@ class UserApiModel:NSObject {
     var confidence:Int = 0
     var name = ""
     var email = ""
+    var avatarUrl = ""
     
     class func map(manager:RKObjectManager) {
         manager.addResponseDescriptor(self.responseDescriptor())
@@ -32,7 +33,18 @@ class UserApiModel:NSObject {
             "confidence": "confidence",
             "name": "name",
             "email": "email",
+            "avatar": "avatarUrl",
             ])
         return mapping
     }
+    
+    func downloadImage() -> UIImage? {
+        if let url = NSURL(string: self.avatarUrl) {
+            if let data = NSData(contentsOfURL: url) {
+                return UIImage(data: data)
+            }
+        }
+        return nil
+    }
 }
+//{"id":3,"email":"bartosz@hernas.pl","name":"Bartosz Hernas","avatar":"http://faces.hern.as/media/images/1b6853bf-9ae8-4a00-afde-2af11103f830.10202937621320306"}

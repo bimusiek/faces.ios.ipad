@@ -46,10 +46,12 @@ class Faces {
         }
     }
     
-    class func getOrCreateFace(image:UIImage, identifier:String, callback:(faceId:String)->()) {
+    class func getOrCreateFace(var image:UIImage, identifier:String, callback:(faceId:String)->()) {
         API.sharedInstance.detect(image, success: { (user) -> () in
             dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
-                
+                if let userImage = user.downloadImage() {
+                    image = userImage
+                }
                 let faceIdentifier = FaceIdentifierModel()
                 faceIdentifier.identifier = identifier
                 
