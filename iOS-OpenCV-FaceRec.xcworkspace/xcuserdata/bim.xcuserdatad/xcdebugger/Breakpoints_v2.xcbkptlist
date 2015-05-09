@@ -2,4 +2,54 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceRec/Faces.swift"
+            timestampString = "452883256.437035"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "getOrCreateFace(_:identifier:callback:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static opencv_facerec.Faces.(getOrCreateFace (opencv_facerec.Faces.Type) -&gt; (ObjectiveC.UIImage, identifier : Swift.String, callback : (faceId : Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "opencv-facerec"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bim/Developer/Faces-ecomm/ios/FaceRec/Faces.swift"
+                  timestampString = "452883256.441603"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static opencv_facerec.Faces.(getOrCreateFace (opencv_facerec.Faces.Type) -&gt; (ObjectiveC.UIImage, identifier : Swift.String, callback : (faceId : Swift.String) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "opencv-facerec"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bim/Developer/Faces-ecomm/ios/FaceRec/Faces.swift"
+                  timestampString = "452883256.441756"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

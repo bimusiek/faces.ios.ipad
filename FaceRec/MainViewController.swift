@@ -162,8 +162,8 @@ class MainViewController:UIViewController {
     func gotFaceModel(face:FaceModel) {
         self.currentPerson = face
         self.confidenceLabel.text = "Face: \(face.faceId)"
-        self.processingLastConfidence = false;
         self.state = .GotFace
+        self.processingLastConfidence = false;
         
     }
     

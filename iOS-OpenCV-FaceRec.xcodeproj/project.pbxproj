@@ -12,7 +12,6 @@
 		3054BB631AFE18CC00094B0B /* RACSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB621AFE18CC00094B0B /* RACSwift.swift */; };
 		3054BB661AFE2A1300094B0B /* FJFaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB651AFE2A1300094B0B /* FJFaceRecognizer.mm */; };
 		3054BB681AFE362500094B0B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB671AFE362500094B0B /* Person.swift */; };
-		3054BB6A1AFE3B2900094B0B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3054BB691AFE3B2900094B0B /* Realm.framework */; };
 		3054BB6C1AFE3B3D00094B0B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3054BB6B1AFE3B3D00094B0B /* libc++.dylib */; };
 		3054BB6E1AFE3B4F00094B0B /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB6D1AFE3B4F00094B0B /* RLMSupport.swift */; };
 		3054BB711AFE3BCE00094B0B /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB701AFE3BCE00094B0B /* FaceModel.swift */; };
@@ -20,6 +19,8 @@
 		3054BB771AFE508F00094B0B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB761AFE508F00094B0B /* API.swift */; };
 		3054F3291AFE512D00B47F51 /* RestKitObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3054F3281AFE512D00B47F51 /* RestKitObjC.m */; };
 		3054F32C1AFE51C300B47F51 /* UserApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054F32B1AFE51C300B47F51 /* UserApiModel.swift */; };
+		30E030A21AFE6E1D00EB1FEF /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E030A11AFE6E1D00EB1FEF /* RealmSwift.framework */; };
+		30E030A31AFE6E1D00EB1FEF /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 30E030A11AFE6E1D00EB1FEF /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		871018331A841928000CEDBD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8710181F1A841928000CEDBD /* AppDelegate.m */; };
 		871018341A841928000CEDBD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 871018201A841928000CEDBD /* LaunchScreen.xib */; };
 		871018351A841928000CEDBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 871018221A841928000CEDBD /* Main.storyboard */; };
@@ -33,6 +34,20 @@
 		8710183F1A841928000CEDBD /* FJLiveCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871018321A841928000CEDBD /* FJLiveCameraViewController.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		30E030A41AFE6E1D00EB1FEF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				30E030A31AFE6E1D00EB1FEF /* RealmSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3054BB5E1AFE140E00094B0B /* opencv-facerec-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "opencv-facerec-Bridging-Header.h"; sourceTree = "<group>"; };
 		3054BB5F1AFE140F00094B0B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +55,6 @@
 		3054BB641AFE2A1300094B0B /* FJFaceRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJFaceRecognizer.h; sourceTree = "<group>"; };
 		3054BB651AFE2A1300094B0B /* FJFaceRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FJFaceRecognizer.mm; sourceTree = "<group>"; };
 		3054BB671AFE362500094B0B /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
-		3054BB691AFE3B2900094B0B /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3054BB6B1AFE3B3D00094B0B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		3054BB6D1AFE3B4F00094B0B /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		3054BB701AFE3BCE00094B0B /* FaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
@@ -49,6 +63,7 @@
 		3054F3281AFE512D00B47F51 /* RestKitObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestKitObjC.m; sourceTree = "<group>"; };
 		3054F32A1AFE516800B47F51 /* RestKitObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestKitObjC.h; sourceTree = "<group>"; };
 		3054F32B1AFE51C300B47F51 /* UserApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApiModel.swift; sourceTree = "<group>"; };
+		30E030A11AFE6E1D00EB1FEF /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		47A50C0BA07F8CFD52D30073 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		70A5E7535BA0C31A438E84CE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8710181E1A841928000CEDBD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,8 +91,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3054BB6C1AFE3B3D00094B0B /* libc++.dylib in Frameworks */,
-				3054BB6A1AFE3B2900094B0B /* Realm.framework in Frameworks */,
 				0B3EDF519E0775A91EF5568C /* libPods.a in Frameworks */,
+				30E030A21AFE6E1D00EB1FEF /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +104,6 @@
 			children = (
 				3054BB6B1AFE3B3D00094B0B /* libc++.dylib */,
 				3054BB6D1AFE3B4F00094B0B /* RLMSupport.swift */,
-				3054BB691AFE3B2900094B0B /* Realm.framework */,
 				70A5E7535BA0C31A438E84CE /* libPods.a */,
 			);
 			name = Frameworks;
@@ -196,6 +210,7 @@
 		872C48DE1A69251A001BD610 = {
 			isa = PBXGroup;
 			children = (
+				30E030A11AFE6E1D00EB1FEF /* RealmSwift.framework */,
 				8710181D1A841928000CEDBD /* FaceRec */,
 				872C48E81A69251A001BD610 /* Products */,
 				ECB32781E80F474F1022438B /* Pods */,
@@ -232,6 +247,8 @@
 				872C48E41A69251A001BD610 /* Frameworks */,
 				872C48E51A69251A001BD610 /* Resources */,
 				F570683AB5E35E7AE533C528 /* Copy Pods Resources */,
+				30E030A41AFE6E1D00EB1FEF /* Embed Frameworks */,
+				30E030A51AFE729B00EB1FEF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -292,6 +309,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		30E030A51AFE729B00EB1FEF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework/strip-frameworks.sh";
+		};
 		6835256A8A6D20DEF06BF770 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -456,6 +486,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/RealmSwift.framework/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/FaceRec/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -472,8 +503,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/RealmSwift.framework/Frameworks",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/FaceRec/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

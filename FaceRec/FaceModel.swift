@@ -7,21 +7,21 @@
 //
 
 import Foundation
-import Realm
+import RealmSwift
 
-class FaceIdentifierModel:RLMObject {
+class FaceIdentifierModel:Object {
     var identifier:String = ""
     var face:FaceModel? {
-        return self.linkingObjectsOfClass(FaceModel.className(), forProperty: "identifiers").last as? FaceModel
+        return self.linkingObjects(FaceModel.self, forProperty: "identifiers").last
     }
 }
 
-class FaceModel:RLMObject {
-    dynamic var identifiers = RLMArray(objectClassName: FaceIdentifierModel.className())
+class FaceModel:Object {
+    dynamic var identifiers = List<FaceIdentifierModel>()
     dynamic var faceId:String = ""
     dynamic var facebookImage = ""
     
     class func get(identifier:String) -> FaceModel? {
-        return FaceModel.objectsWhere("faceId = %@", identifier).lastObject() as? FaceModel
+        return Realm().objects(FaceModel).filter("faceId = %@", identifier).last
     }
 }

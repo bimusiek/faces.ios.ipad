@@ -7,17 +7,15 @@
 //
 
 import Foundation
-import Realm
+import RealmSwift
 
 class Faces {
     class func getOrCreateByIdentifier(image:UIImage, identifier:String, callback:(face:FaceModel)->()) {
-        let realm = RLMRealm.defaultRealm()
-        
-        let identifierResults = FaceIdentifierModel.objectsWhere("identifier = %@", identifier)
+        let identifierResults = Realm().objects(FaceIdentifierModel).filter("identifier = %@", identifier)
         
         var firstResult:FaceModel?
         if identifierResults.count > 0 {
-            let firstIden = identifierResults.firstObject() as! FaceIdentifierModel
+            let firstIden = identifierResults.first!
             firstResult = firstIden.face
         }
         
@@ -43,20 +41,19 @@ class Faces {
     class func getOrCreateFace(image:UIImage, identifier:String, callback:(faceId:String)->()) {
         API.sharedInstance.detect(image, success: { (user) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                let realm = RLMRealm.defaultRealm();
-                
-                let faceIdentifier = FaceIdentifierModel()
-                faceIdentifier.identifier = identifier
-                
-                let face = FaceModel()
-                face.faceId = "\(user.userId)"
-                face.identifiers.addObject(faceIdentifier)
-                
-                realm.beginWriteTransaction()
-                realm.addObject(face)
-                realm.commitWriteTransaction()
-                
-                callback(faceId: face.faceId)
+                let realm = Realm();
+                realm.write {
+                    let faceIdentifier = FaceIdentifierModel()
+                    faceIdentifier.identifier = identifier
+                    
+                    let face = FaceModel()
+                    face.faceId = "\(user.userId)"
+                    face.identifiers.append(faceIdentifier)
+                    
+                    realm.add(face)
+                    
+                    callback(faceId: face.faceId)
+                }
             })
 
         }) { (error) -> () in
