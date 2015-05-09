@@ -75,18 +75,20 @@ class MainViewController:UIViewController {
 
         if detectedFaces.count == 1 {
             if let face = self.faceDetector.faceWithIndex(0) {
-                faceDetected(face)
+                if let grayFace = self.faceDetector.grayFaceWithIndex(0) {
+                    faceDetected(face, grayImage: grayFace)
+                }
             }
         } else if detectedFaces.count > 1 {
             NSLog("Too many faces! \(detectedFaces.count)", "");
         }
     }
     var facesDetected = 0
-    func faceDetected(image:UIImage) {
+    func faceDetected(image:UIImage, grayImage:UIImage) {
         self.facesDetected++
         
         if self.state == .GotFace {
-            self.checkConfidence(image)
+            self.checkConfidence(image, grayImage: grayImage)
             return
         }
 
@@ -102,6 +104,7 @@ class MainViewController:UIViewController {
         switch(self.state) {
         case .NotRecognized:
             self.facesDetected = 0
+            self.processingLastConfidence = false;
             self.cameraView.hidden = false;
             self.faceView.hidden = true;
             
@@ -117,7 +120,7 @@ class MainViewController:UIViewController {
     
     dynamic var processingLastConfidence = false;
     dynamic var processingNewPerson = false;
-    func checkConfidence(face:UIImage) {
+    func checkConfidence(face:UIImage, grayImage:UIImage) {
         if self.processingLastConfidence {
             return
         }
@@ -130,41 +133,39 @@ class MainViewController:UIViewController {
             
             if self.faceRecognizer.labels().count <= 0 {
                 self.processingNewPerson = true
-                self.createPerson(face, callback: { (faceId) -> () in
-                    self.processingLastConfidence = false;
+                self.createPerson(face, grayFace:grayImage, callback: { (faceId) -> () in
                     self.processingNewPerson = false
                     self.gotFaceModel(faceId)
                 })
             } else {
-                identifier = self.faceRecognizer.predict(face, confidence: &confidence)
-                self.confidenceFound(confidence, face: face, identifier: identifier)
+                identifier = self.faceRecognizer.predict(grayImage, confidence: &confidence)
+                self.confidenceFound(confidence, face: face, grayFace:grayImage, identifier: identifier)
             }
         });
     }
     
-    func createPerson(face:UIImage, callback:(face:FaceModel)->()) {
+    func createPerson(face:UIImage, grayFace:UIImage, callback:(face:FaceModel)->()) {
         var identifier = "\(self.faceRecognizer.labels().count)"
-        self.faceRecognizer.updateWithFace(face, name: identifier)
+        self.faceRecognizer.updateWithFace(grayFace, name: identifier)
         Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
             callback(face: face)
         })
     }
     
-    func confidenceFound(confidence:Double, face:UIImage, var identifier:String) {
+    func confidenceFound(confidence:Double, face:UIImage, grayFace:UIImage, var identifier:String) {
         if confidence > 120 {
-            self.createPerson(face, callback:{ (face) -> () in
-                self.processingLastConfidence = false;
+            self.createPerson(face, grayFace:grayFace, callback:{ (face) -> () in
                 self.gotFaceModel(face)
             })
         } else {
             Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
-                self.processingLastConfidence = false;
                 self.gotFaceModel(face)
             })
         }
     }
     
     func gotFaceModel(face:FaceModel) {
+        self.processingLastConfidence = false;
         self.currentPerson = face
         self.confidenceLabel.text = "Face: \(face.faceId)"
         self.state = .GotFace

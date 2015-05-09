@@ -22,5 +22,6 @@
 
 - (NSArray *)detectedFaces;
 - (UIImage *)faceWithIndex:(NSInteger)idx;
+- (UIImage *)grayFaceWithIndex:(NSInteger)idx;
 
 @end

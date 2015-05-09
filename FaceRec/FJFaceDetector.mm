@@ -22,6 +22,7 @@ using namespace cv;
 
     vector<cv::Rect> _faceRects;
     vector<cv::Mat> _faceImgs;
+    vector<cv::Mat> _faceGraysImgs;
     
 }
 
@@ -87,8 +88,17 @@ using namespace cv;
 }
 
 - (UIImage *)faceWithIndex:(NSInteger)idx {
-
+    
     cv::Mat img = self->_faceImgs[idx];
+    
+    UIImage *ret = [UIImage imageFromCVMat:img];
+    
+    return ret;
+}
+
+- (UIImage *)grayFaceWithIndex:(NSInteger)idx {
+    
+    cv::Mat img = self->_faceGraysImgs[idx];
     
     UIImage *ret = [UIImage imageFromCVMat:img];
     
@@ -138,10 +148,11 @@ using namespace cv;
     t = (double)cvGetTickCount() - t;
 //    printf( "detection time = %g ms\n", t/((double)cvGetTickFrequency()*1000.) );
     vector<cv::Mat> faceImages;
+    vector<cv::Mat> faceGrayImages;
     
     for( vector<cv::Rect>::const_iterator r = _faceRects.begin(); r != _faceRects.end(); r++, i++ )
     {
-//        cv::Mat smallImgROI;
+        cv::Mat smallImgROI;
         cv::Point center;
         Scalar color = colors[i%8];
         vector<cv::Rect> nestedObjects;
@@ -153,8 +164,7 @@ using namespace cv;
         //eye detection is pretty low accuracy
 //        if( self->eyesDetector.empty() )
 //            continue;
-//        
-//        smallImgROI = smallImg(*r);
+//
         cv::Mat crop;
         int x = cvRound(r->x*scale) - 200;
         if(x<0) {
@@ -165,11 +175,23 @@ using namespace cv;
         if(y<0) {
             y = 0;
         }
-        cv::Rect properRect(x,y,cvRound(r->width*scale) + 200,cvRound(r->height*scale) + 200);
+        int width = x + cvRound(r->width*scale) + 200;
+        if(rgbImg.size().width < width) {
+            width = rgbImg.size().width;
+        }
+        int height = y + cvRound(r->height*scale) + 200;
+        if(rgbImg.size().height < height) {
+            height = rgbImg.size().height;
+        }
+        
+        cv::Rect properRect(x,y,width-x,height-y);
 
         crop = rgbImg(properRect);
-        
         faceImages.push_back(crop.clone());
+        
+        smallImgROI = smallImg(*r);
+        faceGrayImages.push_back(smallImgROI.clone());
+        
 
         
 //        resize(img, crop, Size(128, 128), 0, 0, INTER_LINEAR);
@@ -196,6 +218,7 @@ using namespace cv;
    
     @synchronized(self) {
         self->_faceImgs = faceImages;
+        self->_faceGraysImgs = faceGrayImages;
         
         __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{

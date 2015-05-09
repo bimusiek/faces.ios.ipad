@@ -48,18 +48,19 @@ class Faces {
         API.sharedInstance.detect(image, success: { (user) -> () in
             dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
                 let realm = Realm();
+                
+                let faceIdentifier = FaceIdentifierModel()
+                faceIdentifier.identifier = identifier
+                
+                let face = FaceModel()
+                face.faceId = "\(user.userId)"
+                face.identifiers.append(faceIdentifier)
                 realm.write {
-                    let faceIdentifier = FaceIdentifierModel()
-                    faceIdentifier.identifier = identifier
-                    
-                    let face = FaceModel()
-                    face.faceId = "\(user.userId)"
-                    face.identifiers.append(faceIdentifier)
-                    
+                    face.imagePath = self.saveImage(image, identifier:identifier)
                     realm.add(face)
-                    
-                    callback(faceId: face.faceId)
                 }
+                
+                callback(faceId: face.faceId)
             })
 
         }) { (error) -> () in
