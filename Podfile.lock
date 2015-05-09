@@ -3,6 +3,34 @@ PODS:
   - iCarousel (1.8.1)
   - ISO8601DateFormatterValueTransformer (0.6.0):
     - RKValueTransformers (~> 1.1.0)
+  - MRProgress (0.8.1):
+    - MRProgress/ActivityIndicator (= 0.8.1)
+    - MRProgress/Blur (= 0.8.1)
+    - MRProgress/Circular (= 0.8.1)
+    - MRProgress/Icons (= 0.8.1)
+    - MRProgress/NavigationBarProgress (= 0.8.1)
+    - MRProgress/Overlay (= 0.8.1)
+  - MRProgress/ActivityIndicator (0.8.1):
+    - MRProgress/Stopable
+  - MRProgress/Blur (0.8.1):
+    - MRProgress/Helper
+  - MRProgress/Circular (0.8.1):
+    - MRProgress/Helper
+    - MRProgress/ProgressBaseClass
+    - MRProgress/Stopable
+  - MRProgress/Helper (0.8.1)
+  - MRProgress/Icons (0.8.1)
+  - MRProgress/NavigationBarProgress (0.8.1):
+    - MRProgress/ProgressBaseClass
+  - MRProgress/Overlay (0.8.1):
+    - MRProgress/ActivityIndicator
+    - MRProgress/Blur
+    - MRProgress/Circular
+    - MRProgress/Helper
+    - MRProgress/Icons
+  - MRProgress/ProgressBaseClass (0.8.1)
+  - MRProgress/Stopable (0.8.1):
+    - MRProgress/Helper
   - OpenCV (2.4.9.1)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
@@ -36,6 +64,7 @@ PODS:
 
 DEPENDENCIES:
   - iCarousel
+  - MRProgress
   - OpenCV (~> 2.4)
   - ReactiveCocoa
   - RestKit
@@ -44,6 +73,7 @@ SPEC CHECKSUMS:
   AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
   iCarousel: dace1cb858e3f4dc2614bee3201041247f82feda
   ISO8601DateFormatterValueTransformer: 3ac3a721381697cab4e792d8049ce2f2e9ad3036
+  MRProgress: 72653f3ffd13c7bbac8c9de1da9bf0249fc2717d
   OpenCV: 6a30a4f71e5b5a879e6f290acc37f1b5115d5fa6
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   RestKit: 1987b5efef289c6b27bd980714d6ca48d3871b78

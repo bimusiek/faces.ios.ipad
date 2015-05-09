@@ -91,8 +91,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4P-og-lbS">
                                 <rect key="frame" x="0.0" y="618" width="1024" height="150"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPR-iQ-zhZ">
-                                        <rect key="frame" x="150" y="29" width="108" height="54"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPR-iQ-zhZ">
+                                        <rect key="frame" x="150" y="28" width="108" height="54"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <color key="textColor" red="0.29803921568627451" green="0.41960784313725491" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -103,12 +103,22 @@
                                         <color key="textColor" red="0.26666666666666666" green="0.39215686274509803" blue="0.51764705882352946" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zuc-ZY-suW" customClass="MRCircularProgressView">
+                                        <rect key="frame" x="50" y="50" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Zuc-ZY-suW" secondAttribute="height" id="kpB-wc-tXp"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Gfh-Vy-p8o"/>
+                                    <constraint firstItem="OPR-iQ-zhZ" firstAttribute="leading" secondItem="Zuc-ZY-suW" secondAttribute="trailing" constant="50" id="Kh6-12-xsd"/>
                                     <constraint firstItem="dd7-4M-Gee" firstAttribute="top" secondItem="OPR-iQ-zhZ" secondAttribute="bottom" constant="5" id="L55-kh-pIy"/>
-                                    <constraint firstItem="OPR-iQ-zhZ" firstAttribute="leading" secondItem="l4P-og-lbS" secondAttribute="leading" constant="150" id="bTA-PZ-WVo"/>
+                                    <constraint firstItem="Zuc-ZY-suW" firstAttribute="leading" secondItem="l4P-og-lbS" secondAttribute="leading" constant="50" id="Nyj-0J-Hl8"/>
+                                    <constraint firstItem="Zuc-ZY-suW" firstAttribute="top" secondItem="l4P-og-lbS" secondAttribute="top" constant="50" id="m1F-48-tJE"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zuc-ZY-suW" secondAttribute="bottom" constant="50" id="sbM-EY-uNj"/>
                                     <constraint firstItem="OPR-iQ-zhZ" firstAttribute="leading" secondItem="dd7-4M-Gee" secondAttribute="leading" id="vsc-Go-r2r"/>
                                     <constraint firstAttribute="centerY" secondItem="OPR-iQ-zhZ" secondAttribute="centerY" constant="20" id="zr6-YL-gux"/>
                                 </constraints>
@@ -140,6 +150,7 @@
                         <outlet property="nameLabel" destination="4iQ-L2-Sap" id="aJQ-3u-K7h"/>
                         <outlet property="productDescriptionLabel" destination="dd7-4M-Gee" id="GOq-8B-okg"/>
                         <outlet property="productNameLabel" destination="OPR-iQ-zhZ" id="w4Y-rH-oTf"/>
+                        <outlet property="progressView" destination="Zuc-ZY-suW" id="Oob-Ob-dGv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

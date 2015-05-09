@@ -8,3 +8,4 @@
 #import <RestKit.h>
 #import "RestKitObjC.h"
 #import <iCarousel.h>
+#import <MRProgress.h>

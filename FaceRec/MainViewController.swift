@@ -29,6 +29,7 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
     @IBOutlet weak var faceLoadingIndicator: UIActivityIndicatorView!
     
     
+    @IBOutlet weak var progressView: MRCircularProgressView!
     var faceDetector:FJFaceDetector!
     var faceRecognizer:FJFaceRecognizer!
 
@@ -42,8 +43,22 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         }
     }
     
+    var progress:Float = 0
+    var initialProgress:Float = 20.0;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.progressView.tintColor = UIColor(red: 76.0/255.0, green: 107.0/255.0, blue: 145.0/255.0, alpha: 1.0)
+        self.progressView.borderWidth = 1.0
+        self.progressView.lineWidth = 6.0
+        self.progressView.valueLabel.hidden = true
+        self.progress = self.initialProgress;
+        self.progressView.progress = self.progress/self.initialProgress;
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("timerUpdated"), userInfo: nil, repeats: true)
+
+        
         self.carousel.dataSource = self
         self.carousel.delegate = self
         self.carousel.type = .Rotary
@@ -279,6 +294,14 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
             return value * 1.1
         }
         return value
+    }
+    
+    func timerUpdated() {
+        self.progress -= 1;
+        if self.progress < 0 {
+            self.progress = self.initialProgress
+        }
+        self.progressView.setProgress(self.progress/self.initialProgress, animated: true)
     }
     
 }
