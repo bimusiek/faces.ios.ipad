@@ -21,14 +21,12 @@ class Faces {
         
         
         if firstResult == nil {
-            
             self.getOrCreateFace(image, identifier:identifier, callback: { (faceId) -> () in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     let face = FaceModel.get(faceId)!
                     callback(face: face)
                 })
             })
-            
         } else {
             let face = firstResult!
             let faceId = face.faceId

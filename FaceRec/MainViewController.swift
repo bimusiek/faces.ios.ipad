@@ -44,7 +44,7 @@ class MainViewController:UIViewController {
         
         self.faceDetector.facesDetected.filter { (_) -> Bool in
             return self.faceDetector.detectedFaces().count > 0
-        }.throttle(5).subscribeNext { (_) -> Void in
+        }.throttle(1).subscribeNext { (_) -> Void in
             self.state = .NotRecognized
         }
         
