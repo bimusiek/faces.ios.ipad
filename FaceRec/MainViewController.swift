@@ -129,6 +129,7 @@ class MainViewController:UIViewController {
             if self.faceRecognizer.labels().count <= 0 {
                 self.processingNewPerson = true
                 self.createPerson(face, callback: { (faceId) -> () in
+                    self.processingLastConfidence = false;
                     self.processingNewPerson = false
                     self.gotFaceModel(faceId)
                 })
@@ -140,7 +141,7 @@ class MainViewController:UIViewController {
     }
     
     func createPerson(face:UIImage, callback:(face:FaceModel)->()) {
-        var identifier = self.nameForPerson()
+        var identifier = "\(self.faceRecognizer.labels().count)"
         self.faceRecognizer.updateWithFace(face, name: identifier)
         Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
             callback(face: face)
@@ -150,10 +151,12 @@ class MainViewController:UIViewController {
     func confidenceFound(confidence:Double, face:UIImage, var identifier:String) {
         if confidence > 150 {
             self.createPerson(face, callback:{ (face) -> () in
+                self.processingLastConfidence = false;
                 self.gotFaceModel(face)
             })
         } else {
             Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
+                self.processingLastConfidence = false;
                 self.gotFaceModel(face)
             })
         }
@@ -163,12 +166,7 @@ class MainViewController:UIViewController {
         self.currentPerson = face
         self.confidenceLabel.text = "Face: \(face.faceId)"
         self.state = .GotFace
-        self.processingLastConfidence = false;
         
-    }
-    
-    func nameForPerson() -> String {
-        return "Person \(self.faceRecognizer.labels().count)"
     }
     
     func gotFace() {
@@ -177,9 +175,10 @@ class MainViewController:UIViewController {
         
         if self.lastPerson?.faceId != self.currentPerson?.faceId {
             self.lastPerson = self.currentPerson
-            
-            // Get here
-//            self.faceView.image = person.image;
+        }
+        
+        if let currentPerson = self.currentPerson {
+            self.faceView.image = currentPerson.getImage()
         }
     }
 }

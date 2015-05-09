@@ -21,7 +21,7 @@ class FaceModel:Object {
     
     dynamic var identifiers = List<FaceIdentifierModel>()
     dynamic var faceId:String = ""
-    dynamic var facebookImage = ""
+    dynamic var imagePath = ""
     dynamic var name = ""
     
     class func get(identifier:String) -> FaceModel? {
@@ -40,5 +40,11 @@ class FaceModel:Object {
             realm.add(face)
         }
         return face
+    }
+    
+    func getImage() -> UIImage {
+        var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        var imagePath = paths.stringByAppendingPathComponent(self.imagePath)
+        return UIImage(contentsOfFile: imagePath)!
     }
 }
