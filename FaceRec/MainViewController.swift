@@ -50,7 +50,7 @@ class MainViewController:UIViewController {
         
         RACObserve(self, "processingNewPerson").subscribeNext { (_) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.faceLoadingIndicator.hidden = !self.processingNewPerson
+                self.stateWasUpdated()
             })
         }
 
@@ -109,15 +109,17 @@ class MainViewController:UIViewController {
             self.processingLastConfidence = false;
             self.cameraView.hidden = false;
             self.faceView.hidden = true;
+            self.confidenceLabel.text = "No one in range"
             
         case .GotFace:
             self.gotFace()
-        case .DiscoveredOnFacebook:
-            self.cameraView.hidden = true;
-            self.faceView.hidden = false;
+        default:
+            break
         }
-        
-        
+        self.faceLoadingIndicator.hidden = !self.processingNewPerson
+        if(self.processingNewPerson) {
+            self.confidenceLabel.text = "Loading..."
+        }
     }
     
     dynamic var processingLastConfidence = false;
@@ -182,8 +184,6 @@ class MainViewController:UIViewController {
         self.faceView.image = self.currentPerson?.getImage()
         if let currentPerson = self.currentPerson {
             self.confidenceLabel.text = "\(currentPerson.name) (\(currentPerson.email))"
-        } else {
-            self.confidenceLabel.text = "No one in range"
         }
         
     }
