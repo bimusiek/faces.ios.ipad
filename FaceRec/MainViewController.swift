@@ -16,19 +16,25 @@ enum FaceDetectionState {
 class MainViewController:UIViewController {
     @IBOutlet weak var cameraView: UIImageView!
     @IBOutlet weak var faceView: UIImageView!
+    @IBOutlet weak var confidenceLabel: UILabel!
     
     var faceDetector:FJFaceDetector!
-    
-    var faces = [UIImage]()
+    var faceRecognizer:FJFaceRecognizer!
+
+    var lastPerson:FaceModel?
+    var currentPerson:FaceModel?
     
     var state = FaceDetectionState.NotRecognized {
         didSet {
+            
             self.stateWasUpdated()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.faceRecognizer = FJFaceRecognizer()
+        
         self.faceDetector = FJFaceDetector(cameraView: self.cameraView, scale: 2.0)
         self.faceDetector.facesDetected.subscribeNext { [weak self] (_) -> Void in
             self?.detectedFacesChanged()
@@ -36,7 +42,7 @@ class MainViewController:UIViewController {
         
         self.faceDetector.facesDetected.filter { (_) -> Bool in
             return self.faceDetector.detectedFaces().count > 0
-        }.throttle(0.5).subscribeNext { (_) -> Void in
+        }.throttle(5).subscribeNext { (_) -> Void in
             self.state = .NotRecognized
         }
 
@@ -57,7 +63,7 @@ class MainViewController:UIViewController {
     
     func detectedFacesChanged() {
         let detectedFaces = self.faceDetector.detectedFaces()
-        NSLog("Detected faces: \(detectedFaces.count)", "");
+//        NSLog("Detected faces: \(detectedFaces.count)", "");
 
         if detectedFaces.count == 1 {
             if let face = self.faceDetector.faceWithIndex(0) {
@@ -67,32 +73,100 @@ class MainViewController:UIViewController {
             NSLog("Too many faces! \(detectedFaces.count)", "");
         }
     }
+    var facesDetected = 0
     func faceDetected(image:UIImage) {
-        if count(self.faces) >= 5 {
+        self.facesDetected++
+        
+        if self.state == .GotFace {
+            self.checkConfidence(image)
+        }
+
+        if self.facesDetected >= 5 {
             self.state = .GotFace
             return;
         }
-        self.faces.append(image);
-
+        
         
     }
     
     func stateWasUpdated() {
         switch(self.state) {
         case .NotRecognized:
-            self.faces = []
+            self.facesDetected = 0
             self.cameraView.hidden = false;
             self.faceView.hidden = true;
             
         case .GotFace:
-            self.faceView.image = self.faces.last;
-            self.cameraView.hidden = true;
-            self.faceView.hidden = false;
-            
+            self.gotFace()
         case .DiscoveredOnFacebook:
-            self.faceView.image = self.faces.last;
             self.cameraView.hidden = true;
             self.faceView.hidden = false;
+        }
+    }
+    
+    var processingLastConfidence = false;
+    func checkConfidence(face:UIImage) {
+        if self.processingLastConfidence {
+            return
+        }
+        
+        self.processingLastConfidence = true;
+        dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
+            
+            var confidence:Double = 0;
+            var identifier:String!
+            var finish:(identifier:String)->() = { (identifier) -> Void in
+            }
+            
+            if self.faceRecognizer.labels().count <= 0 {
+                self.createPerson(face, callback: { (face) -> () in
+                    self.gotFaceModel(face)
+                })
+            } else {
+                identifier = self.faceRecognizer.predict(face, confidence: &confidence)
+                self.confidenceFound(confidence, face: face, identifier: identifier)
+            }
+        });
+    }
+    
+    func createPerson(face:UIImage, callback:(face:FaceModel)->()) {
+        var identifier = self.nameForPerson()
+        self.faceRecognizer.updateWithFace(face, name: identifier)
+        Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: callback)
+    }
+    
+    func confidenceFound(confidence:Double, face:UIImage, var identifier:String) {
+        if confidence > 150 {
+            self.createPerson(face, callback:{ (face) -> () in
+                self.gotFaceModel(face)
+            })
+        } else {
+            Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
+                self.gotFaceModel(face)
+            })
+        }
+    }
+    
+    func gotFaceModel(face:FaceModel) {
+        self.currentPerson = face
+        self.confidenceLabel.text = "Face: \(face.id)"
+        self.processingLastConfidence = false;
+        self.state = .GotFace
+    }
+    
+    func nameForPerson() -> String {
+        return "Person \(self.faceRecognizer.labels().count)"
+    }
+    
+    func gotFace() {
+        self.cameraView.hidden = true;
+        self.faceView.hidden = false;
+        
+        if self.lastPerson?.id != self.currentPerson?.id {
+            self.lastPerson = self.currentPerson
+            
+            // Get here
+//            self.faceView.image = person.image;
         }
     }
 }

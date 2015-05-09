@@ -3,4 +3,6 @@
 //
 
 #import "FJFaceDetector.h"
+#import "FJFaceRecognizer.h"
 #import <ReactiveCocoa.h>
+#import <Realm/Realm.h>

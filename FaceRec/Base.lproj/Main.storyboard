@@ -30,13 +30,21 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GdF-VZ-f1b">
                                         <rect key="frame" x="10" y="10" width="80" height="80"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNX-9r-1LQ">
+                                        <rect key="frame" x="972" y="40" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.4941176471" green="0.30196078430000001" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="1Wu-gZ-odU"/>
+                                    <constraint firstAttribute="trailing" secondItem="jNX-9r-1LQ" secondAttribute="trailing" constant="10" id="Cum-bc-iZb"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="centerX" secondItem="GdF-VZ-f1b" secondAttribute="centerX" id="DZv-Ul-dyA"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="top" secondItem="JXD-Y4-vXY" secondAttribute="top" constant="10" id="DvN-3S-hSi"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="width" secondItem="GdF-VZ-f1b" secondAttribute="width" id="MEU-H4-xzL"/>
+                                    <constraint firstAttribute="centerY" secondItem="jNX-9r-1LQ" secondAttribute="centerY" id="PFn-B7-1Za"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="leading" secondItem="JXD-Y4-vXY" secondAttribute="leading" constant="10" id="SQd-Hu-UqI"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="height" secondItem="GdF-VZ-f1b" secondAttribute="height" id="pxc-g3-rUf"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="centerY" secondItem="GdF-VZ-f1b" secondAttribute="centerY" id="sHZ-Iq-Srz"/>
@@ -55,6 +63,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="cameraView" destination="thZ-41-ptk" id="Q9t-2b-t8I"/>
+                        <outlet property="confidenceLabel" destination="jNX-9r-1LQ" id="HW7-We-1tg"/>
                         <outlet property="faceView" destination="GdF-VZ-f1b" id="U44-hl-VRc"/>
                     </connections>
                 </viewController>

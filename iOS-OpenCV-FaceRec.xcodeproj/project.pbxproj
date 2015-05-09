@@ -10,6 +10,13 @@
 		0B3EDF519E0775A91EF5568C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A5E7535BA0C31A438E84CE /* libPods.a */; };
 		3054BB601AFE140F00094B0B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB5F1AFE140F00094B0B /* MainViewController.swift */; };
 		3054BB631AFE18CC00094B0B /* RACSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB621AFE18CC00094B0B /* RACSwift.swift */; };
+		3054BB661AFE2A1300094B0B /* FJFaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB651AFE2A1300094B0B /* FJFaceRecognizer.mm */; };
+		3054BB681AFE362500094B0B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB671AFE362500094B0B /* Person.swift */; };
+		3054BB6A1AFE3B2900094B0B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3054BB691AFE3B2900094B0B /* Realm.framework */; };
+		3054BB6C1AFE3B3D00094B0B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3054BB6B1AFE3B3D00094B0B /* libc++.dylib */; };
+		3054BB6E1AFE3B4F00094B0B /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB6D1AFE3B4F00094B0B /* RLMSupport.swift */; };
+		3054BB711AFE3BCE00094B0B /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB701AFE3BCE00094B0B /* FaceModel.swift */; };
+		3054BB741AFE3CE700094B0B /* Faces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB731AFE3CE700094B0B /* Faces.swift */; };
 		871018331A841928000CEDBD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8710181F1A841928000CEDBD /* AppDelegate.m */; };
 		871018341A841928000CEDBD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 871018201A841928000CEDBD /* LaunchScreen.xib */; };
 		871018351A841928000CEDBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 871018221A841928000CEDBD /* Main.storyboard */; };
@@ -27,6 +34,14 @@
 		3054BB5E1AFE140E00094B0B /* opencv-facerec-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "opencv-facerec-Bridging-Header.h"; sourceTree = "<group>"; };
 		3054BB5F1AFE140F00094B0B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3054BB621AFE18CC00094B0B /* RACSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACSwift.swift; sourceTree = "<group>"; };
+		3054BB641AFE2A1300094B0B /* FJFaceRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJFaceRecognizer.h; sourceTree = "<group>"; };
+		3054BB651AFE2A1300094B0B /* FJFaceRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FJFaceRecognizer.mm; sourceTree = "<group>"; };
+		3054BB671AFE362500094B0B /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		3054BB691AFE3B2900094B0B /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		3054BB6B1AFE3B3D00094B0B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		3054BB6D1AFE3B4F00094B0B /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
+		3054BB701AFE3BCE00094B0B /* FaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
+		3054BB731AFE3CE700094B0B /* Faces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Faces.swift; sourceTree = "<group>"; };
 		47A50C0BA07F8CFD52D30073 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		70A5E7535BA0C31A438E84CE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8710181E1A841928000CEDBD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -53,6 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3054BB6C1AFE3B3D00094B0B /* libc++.dylib in Frameworks */,
+				3054BB6A1AFE3B2900094B0B /* Realm.framework in Frameworks */,
 				0B3EDF519E0775A91EF5568C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,6 +80,9 @@
 		1FAC551379DD0917CC2BA698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3054BB6B1AFE3B3D00094B0B /* libc++.dylib */,
+				3054BB6D1AFE3B4F00094B0B /* RLMSupport.swift */,
+				3054BB691AFE3B2900094B0B /* Realm.framework */,
 				70A5E7535BA0C31A438E84CE /* libPods.a */,
 			);
 			name = Frameworks;
@@ -76,9 +96,27 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		3054BB6F1AFE3BBD00094B0B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3054BB701AFE3BCE00094B0B /* FaceModel.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3054BB721AFE3CDD00094B0B /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				3054BB731AFE3CE700094B0B /* Faces.swift */,
+			);
+			name = Stores;
+			sourceTree = "<group>";
+		};
 		8710181D1A841928000CEDBD /* FaceRec */ = {
 			isa = PBXGroup;
 			children = (
+				3054BB721AFE3CDD00094B0B /* Stores */,
+				3054BB6F1AFE3BBD00094B0B /* Models */,
 				3054BB611AFE18AA00094B0B /* Helpers */,
 				8710181E1A841928000CEDBD /* AppDelegate.h */,
 				8710181F1A841928000CEDBD /* AppDelegate.m */,
@@ -87,6 +125,7 @@
 				871018401A841936000CEDBD /* Supporting Files */,
 				8710182E1A841928000CEDBD /* main.m */,
 				871018431A8419DE000CEDBD /* Categories */,
+				3054BB671AFE362500094B0B /* Person.swift */,
 			);
 			path = FaceRec;
 			sourceTree = "<group>";
@@ -106,6 +145,8 @@
 		871018411A8419C1000CEDBD /* OpenCV Wrappers */ = {
 			isa = PBXGroup;
 			children = (
+				3054BB641AFE2A1300094B0B /* FJFaceRecognizer.h */,
+				3054BB651AFE2A1300094B0B /* FJFaceRecognizer.mm */,
 				871018241A841928000CEDBD /* FJFaceDetector.h */,
 				871018251A841928000CEDBD /* FJFaceDetector.mm */,
 			);
@@ -269,11 +310,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3054BB741AFE3CE700094B0B /* Faces.swift in Sources */,
+				3054BB711AFE3BCE00094B0B /* FaceModel.swift in Sources */,
 				3054BB601AFE140F00094B0B /* MainViewController.swift in Sources */,
 				8710183F1A841928000CEDBD /* FJLiveCameraViewController.m in Sources */,
+				3054BB661AFE2A1300094B0B /* FJFaceRecognizer.mm in Sources */,
 				3054BB631AFE18CC00094B0B /* RACSwift.swift in Sources */,
 				8710183D1A841928000CEDBD /* main.m in Sources */,
 				871018361A841928000CEDBD /* FJFaceDetector.mm in Sources */,
+				3054BB681AFE362500094B0B /* Person.swift in Sources */,
+				3054BB6E1AFE3B4F00094B0B /* RLMSupport.swift in Sources */,
 				8710183E1A841928000CEDBD /* UIImage+OpenCV.mm in Sources */,
 				871018331A841928000CEDBD /* AppDelegate.m in Sources */,
 			);
@@ -385,6 +431,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/FaceRec/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,6 +449,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/FaceRec/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
