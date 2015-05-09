@@ -49,7 +49,9 @@ class MainViewController:UIViewController {
         }
         
         RACObserve(self, "processingNewPerson").subscribeNext { (_) -> Void in
-            self.stateWasUpdated()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.faceLoadingIndicator.hidden = !self.processingNewPerson
+            })
         }
 
     }    
@@ -110,7 +112,7 @@ class MainViewController:UIViewController {
             self.faceView.hidden = false;
         }
         
-        self.faceLoadingIndicator.hidden = !self.processingNewPerson
+        
     }
     
     dynamic var processingLastConfidence = false;
@@ -149,7 +151,7 @@ class MainViewController:UIViewController {
     }
     
     func confidenceFound(confidence:Double, face:UIImage, var identifier:String) {
-        if confidence > 150 {
+        if confidence > 120 {
             self.createPerson(face, callback:{ (face) -> () in
                 self.processingLastConfidence = false;
                 self.gotFaceModel(face)

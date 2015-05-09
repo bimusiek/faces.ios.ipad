@@ -115,10 +115,13 @@ using namespace cv;
         CV_RGB(255,255,0),
         CV_RGB(255,0,0),
         CV_RGB(255,0,255)} ;
-    Mat gray, smallImg( cvRound (img.rows/scale), cvRound(img.cols/scale), CV_8UC1 );
+    Mat gray, rgbImg, smallImg( cvRound (img.rows/scale), cvRound(img.cols/scale), CV_8UC1 );
+    Mat smallColorImgSmall( cvRound (img.rows/scale), cvRound(img.cols/scale), CV_8UC2 );
     
     cvtColor( img, gray, COLOR_BGR2GRAY );
+    cvtColor(img, rgbImg, COLOR_BGR2RGB);
     resize( gray, smallImg, smallImg.size(), 0, 0, INTER_LINEAR );
+    resize( rgbImg, smallColorImgSmall, smallColorImgSmall.size(), 0, 0, INTER_LINEAR );
     equalizeHist( smallImg, smallImg );
     
 
@@ -138,7 +141,7 @@ using namespace cv;
     
     for( vector<cv::Rect>::const_iterator r = _faceRects.begin(); r != _faceRects.end(); r++, i++ )
     {
-        cv::Mat smallImgROI;
+//        cv::Mat smallImgROI;
         cv::Point center;
         Scalar color = colors[i%8];
         vector<cv::Rect> nestedObjects;
@@ -151,9 +154,29 @@ using namespace cv;
 //        if( self->eyesDetector.empty() )
 //            continue;
 //        
-        smallImgROI = smallImg(*r);
+//        smallImgROI = smallImg(*r);
+        cv::Mat crop;
+        int x = cvRound(r->x*scale) - 200;
+        if(x<0) {
+            x = 0;
+        }
         
-        faceImages.push_back(smallImgROI.clone());
+        int y = cvRound(r->y*scale) - 200;
+        if(y<0) {
+            y = 0;
+        }
+        cv::Rect properRect(x,y,cvRound(r->width*scale) + 200,cvRound(r->height*scale) + 200);
+
+        crop = rgbImg(properRect);
+        
+        faceImages.push_back(crop.clone());
+
+        
+//        resize(img, crop, Size(128, 128), 0, 0, INTER_LINEAR);
+        
+//        cv::Point pt1(r->x, r->y); // Display detected faces on main window - live stream from camera
+//        cv::Point pt2((r->x + r->height), (r->y + r->width));
+//        cv::rectangle(frame, pt1, pt2, Scalar(0, 255, 0), 2, 8, 0);
 //
 //        
 //        

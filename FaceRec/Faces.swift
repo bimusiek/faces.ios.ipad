@@ -46,7 +46,7 @@ class Faces {
     
     class func getOrCreateFace(image:UIImage, identifier:String, callback:(faceId:String)->()) {
         API.sharedInstance.detect(image, success: { (user) -> () in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
                 let realm = Realm();
                 realm.write {
                     let faceIdentifier = FaceIdentifierModel()
@@ -63,15 +63,17 @@ class Faces {
             })
 
         }) { (error) -> () in
-            let face = FaceModel.getNotRecognizedFace()
-            let faceIdentifier = FaceIdentifierModel()
-            faceIdentifier.identifier = identifier
-            
-            Realm().write {
-                face.imagePath = self.saveImage(image, identifier:identifier)
-                face.identifiers.append(faceIdentifier)
-            }
-            callback(faceId: face.faceId)
+            dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
+                let face = FaceModel.getNotRecognizedFace()
+                let faceIdentifier = FaceIdentifierModel()
+                faceIdentifier.identifier = identifier
+                
+                Realm().write {
+                    face.imagePath = self.saveImage(image, identifier:identifier)
+                    face.identifiers.append(faceIdentifier)
+                }
+                callback(faceId: face.faceId)
+            })
         }
     }
     
