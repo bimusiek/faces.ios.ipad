@@ -50,8 +50,7 @@ class Faces {
                 let faceIdentifier = FaceIdentifierModel()
                 faceIdentifier.identifier = identifier
                 
-                let face = FaceModel()
-                face.faceId = "\(user.userId)"
+                let face = FaceModel.createFromUser(user)
                 face.identifiers.append(faceIdentifier)
                 realm.write {
                     face.imagePath = self.saveImage(image, identifier:identifier)

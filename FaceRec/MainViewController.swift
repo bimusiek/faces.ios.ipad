@@ -103,6 +103,8 @@ class MainViewController:UIViewController {
     func stateWasUpdated() {
         switch(self.state) {
         case .NotRecognized:
+            self.currentPerson = nil
+            self.lastPerson = nil
             self.facesDetected = 0
             self.processingLastConfidence = false;
             self.cameraView.hidden = false;
@@ -167,9 +169,7 @@ class MainViewController:UIViewController {
     func gotFaceModel(face:FaceModel) {
         self.processingLastConfidence = false;
         self.currentPerson = face
-        self.confidenceLabel.text = "Face: \(face.faceId)"
         self.state = .GotFace
-        
     }
     
     func gotFace() {
@@ -179,9 +179,12 @@ class MainViewController:UIViewController {
         if self.lastPerson?.faceId != self.currentPerson?.faceId {
             self.lastPerson = self.currentPerson
         }
-        
+        self.faceView.image = self.currentPerson?.getImage()
         if let currentPerson = self.currentPerson {
-            self.faceView.image = currentPerson.getImage()
+            self.confidenceLabel.text = "\(currentPerson.name) (\(currentPerson.email))"
+        } else {
+            self.confidenceLabel.text = "No one in range"
         }
+        
     }
 }

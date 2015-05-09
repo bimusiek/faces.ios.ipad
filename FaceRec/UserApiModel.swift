@@ -12,6 +12,8 @@ import Foundation
 class UserApiModel:NSObject {
     var userId:Int = 0
     var confidence:Int = 0
+    var name = ""
+    var email = ""
     
     class func map(manager:RKObjectManager) {
         manager.addResponseDescriptor(self.responseDescriptor())
@@ -28,6 +30,8 @@ class UserApiModel:NSObject {
         mapping.addAttributeMappingsFromDictionary([
             "id": "userId",
             "confidence": "confidence",
+            "name": "name",
+            "email": "email",
             ])
         return mapping
     }

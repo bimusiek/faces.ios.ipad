@@ -23,6 +23,7 @@ class FaceModel:Object {
     dynamic var faceId:String = ""
     dynamic var imagePath = ""
     dynamic var name = ""
+    dynamic var email = ""
     
     class func get(identifier:String) -> FaceModel? {
         return Realm().objects(FaceModel).filter("faceId = %@", identifier).last
@@ -33,6 +34,7 @@ class FaceModel:Object {
             return face
         }
         var face:FaceModel = FaceModel()
+        face.name = "Unrecognized"
         face.faceId = self.UNRECOGNIZED_FACE
         
         let realm = Realm()
@@ -46,5 +48,13 @@ class FaceModel:Object {
         var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         var imagePath = paths.stringByAppendingPathComponent(self.imagePath)
         return UIImage(contentsOfFile: imagePath)!
+    }
+    
+    class func createFromUser(user:UserApiModel) -> FaceModel {
+        let face = FaceModel()
+        face.name = user.name
+        face.email = user.email
+        face.faceId = "\(user.userId)"
+        return face
     }
 }
