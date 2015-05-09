@@ -17,11 +17,28 @@ class FaceIdentifierModel:Object {
 }
 
 class FaceModel:Object {
+    static let UNRECOGNIZED_FACE = "unrecognized"
+    
     dynamic var identifiers = List<FaceIdentifierModel>()
     dynamic var faceId:String = ""
     dynamic var facebookImage = ""
+    dynamic var name = ""
     
     class func get(identifier:String) -> FaceModel? {
         return Realm().objects(FaceModel).filter("faceId = %@", identifier).last
+    }
+    
+    class func getNotRecognizedFace() -> FaceModel {
+        if let face = Realm().objects(FaceModel).filter("faceId = %@", self.UNRECOGNIZED_FACE).last {
+            return face
+        }
+        var face:FaceModel = FaceModel()
+        face.faceId = self.UNRECOGNIZED_FACE
+        
+        let realm = Realm()
+        realm.write { () -> Void in
+            realm.add(face)
+        }
+        return face
     }
 }

@@ -57,7 +57,8 @@ class API:NSObject {
             let object = result.firstObject as! UserApiModel
             success(user: object)
         }) { (operation, error) -> Void in
-            NSLog("Got error: \(error)")
+            NSLog("Got error: \(error.localizedDescription)")
+            failure(error: error)
         }
         self.manager.enqueueObjectRequestOperation(operation)
     }

@@ -57,7 +57,13 @@ class Faces {
             })
 
         }) { (error) -> () in
-            
+            let face = FaceModel.getNotRecognizedFace()
+            let faceIdentifier = FaceIdentifierModel()
+            faceIdentifier.identifier = identifier
+            Realm().write {
+                face.identifiers.append(faceIdentifier)
+            }
+            callback(faceId: face.faceId)
         }
     }
 }
