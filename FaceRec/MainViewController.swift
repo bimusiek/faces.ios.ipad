@@ -18,6 +18,10 @@ class MainViewController:UIViewController {
     @IBOutlet weak var faceView: UIImageView!
     @IBOutlet weak var confidenceLabel: UILabel!
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var advertLabel: UILabel!
+    
+    
     @IBOutlet weak var faceLoadingIndicator: UIActivityIndicatorView!
     
     var faceDetector:FJFaceDetector!
@@ -110,9 +114,11 @@ class MainViewController:UIViewController {
             self.cameraView.hidden = false;
             self.faceView.hidden = true;
             self.confidenceLabel.text = "No one in range"
+            self.nameLabel.text = "Hi stranger! Take a look!"
             
         case .GotFace:
             self.gotFace()
+            self.confidenceLabel.text = ""
         default:
             break
         }
@@ -130,20 +136,21 @@ class MainViewController:UIViewController {
         }
         
         self.processingLastConfidence = true;
-        dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
+        dispatch_async(dispatch_get_global_queue(0, 0), { [weak self] () -> Void in
             
             var confidence:Double = 0;
             var identifier:String!
-            
-            if self.faceRecognizer.labels().count <= 0 {
-                self.processingNewPerson = true
-                self.createPerson(face, grayFace:grayImage, callback: { (faceId) -> () in
-                    self.processingNewPerson = false
-                    self.gotFaceModel(faceId)
-                })
-            } else {
-                identifier = self.faceRecognizer.predict(grayImage, confidence: &confidence)
-                self.confidenceFound(confidence, face: face, grayFace:grayImage, identifier: identifier)
+            if let weakSelf = self {
+                if weakSelf.faceRecognizer.labels().count <= 0 {
+                    weakSelf.processingNewPerson = true
+                    weakSelf.createPerson(face, grayFace:grayImage, callback: { [weak self] (faceId) -> () in
+                        weakSelf.processingNewPerson = false
+                        weakSelf.gotFaceModel(faceId)
+                        })
+                } else {
+                    identifier = weakSelf.faceRecognizer.predict(grayImage, confidence: &confidence)
+                    weakSelf.confidenceFound(confidence, face: face, grayFace:grayImage, identifier: identifier)
+                }
             }
         });
     }
@@ -151,25 +158,28 @@ class MainViewController:UIViewController {
     func createPerson(face:UIImage, grayFace:UIImage, callback:(face:FaceModel)->()) {
         var identifier = "\(self.faceRecognizer.labels().count)"
         self.faceRecognizer.updateWithFace(grayFace, name: identifier)
-        Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
+        Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { [weak self] (face) -> () in
             callback(face: face)
         })
     }
     
     func confidenceFound(confidence:Double, face:UIImage, grayFace:UIImage, var identifier:String) {
         if confidence > 120 {
-            self.createPerson(face, grayFace:grayFace, callback:{ (face) -> () in
-                self.gotFaceModel(face)
+            self.createPerson(face, grayFace:grayFace, callback:{ [weak self] (face) -> () in
+                self?.gotFaceModel(face)
             })
         } else {
-            Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
-                self.gotFaceModel(face)
+            Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { [weak self] (face) -> () in
+                self?.gotFaceModel(face)
             })
         }
     }
     
     func gotFaceModel(face:FaceModel) {
+        objc_sync_enter(face)
         self.processingLastConfidence = false;
+        objc_sync_exit(face)
+        
         self.currentPerson = face
         self.state = .GotFace
     }
@@ -183,7 +193,7 @@ class MainViewController:UIViewController {
         }
         self.faceView.image = self.currentPerson?.getImage()
         if let currentPerson = self.currentPerson {
-            self.confidenceLabel.text = "\(currentPerson.name) (\(currentPerson.email))"
+            self.nameLabel.text = "Hi \(currentPerson.name)"
         }
         
     }

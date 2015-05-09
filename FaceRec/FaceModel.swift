@@ -34,7 +34,7 @@ class FaceModel:Object {
             return face
         }
         var face:FaceModel = FaceModel()
-        face.name = "Unrecognized"
+        face.name = "stranger"
         face.faceId = self.UNRECOGNIZED_FACE
         
         let realm = Realm()
@@ -44,10 +44,10 @@ class FaceModel:Object {
         return face
     }
     
-    func getImage() -> UIImage {
+    func getImage() -> UIImage? {
         var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         var imagePath = paths.stringByAppendingPathComponent(self.imagePath)
-        return UIImage(contentsOfFile: imagePath)!
+        return UIImage(contentsOfFile: imagePath)
     }
     
     class func createFromUser(user:UserApiModel) -> FaceModel {
