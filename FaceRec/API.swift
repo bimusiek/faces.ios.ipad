@@ -19,28 +19,11 @@ class API:NSObject {
         manager.HTTPClient.parameterEncoding = AFJSONParameterEncoding
         RestKitObjC.initLogging()
         
-//        Location.map(manager)
         UserApiModel.map(manager)
         
         return manager
         }()
     
-//    
-//    func fetchUser(success:()->(), failure:()->()) {
-//        if self.token != nil {
-//            self.manager.getObjectsAtPath("users/me/", parameters: [:], success: { [weak self] (operation, result) -> Void in
-//                if let user = result.firstObject as? User {
-//                    self?.user = user
-//                    success()
-//                }
-//                }, failure: { (operation, error) -> Void in
-//                    self.handleError(error)
-//                    failure()
-//            })
-//        } else {
-//            failure()
-//        }
-    //    }
     internal class var sharedInstance : API {
         struct Static {
             static let instance : API = API()

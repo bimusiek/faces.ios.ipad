@@ -165,21 +165,22 @@ using namespace cv;
 //        if( self->eyesDetector.empty() )
 //            continue;
 //
+        int margin = 100;
         cv::Mat crop;
-        int x = cvRound(r->x*scale) - 200;
+        int x = cvRound(r->x*scale) - margin;
         if(x<0) {
             x = 0;
         }
         
-        int y = cvRound(r->y*scale) - 200;
+        int y = cvRound(r->y*scale) - margin;
         if(y<0) {
             y = 0;
         }
-        int width = x + cvRound(r->width*scale) + 200;
+        int width = x + cvRound(r->width*scale) + margin;
         if(rgbImg.size().width < width) {
             width = rgbImg.size().width;
         }
-        int height = y + cvRound(r->height*scale) + 200;
+        int height = y + cvRound(r->height*scale) + margin;
         if(rgbImg.size().height < height) {
             height = rgbImg.size().height;
         }
