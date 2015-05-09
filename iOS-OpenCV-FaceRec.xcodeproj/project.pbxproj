@@ -21,6 +21,7 @@
 		3054F32C1AFE51C300B47F51 /* UserApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054F32B1AFE51C300B47F51 /* UserApiModel.swift */; };
 		30E030A21AFE6E1D00EB1FEF /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E030A11AFE6E1D00EB1FEF /* RealmSwift.framework */; };
 		30E030A31AFE6E1D00EB1FEF /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 30E030A11AFE6E1D00EB1FEF /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		30E030A71AFEB29E00EB1FEF /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E030A61AFEB29E00EB1FEF /* PhotoCell.swift */; };
 		871018331A841928000CEDBD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8710181F1A841928000CEDBD /* AppDelegate.m */; };
 		871018341A841928000CEDBD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 871018201A841928000CEDBD /* LaunchScreen.xib */; };
 		871018351A841928000CEDBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 871018221A841928000CEDBD /* Main.storyboard */; };
@@ -31,7 +32,6 @@
 		8710183C1A841928000CEDBD /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8710182D1A841928000CEDBD /* Info.plist */; };
 		8710183D1A841928000CEDBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8710182E1A841928000CEDBD /* main.m */; };
 		8710183E1A841928000CEDBD /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 871018301A841928000CEDBD /* UIImage+OpenCV.mm */; };
-		8710183F1A841928000CEDBD /* FJLiveCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871018321A841928000CEDBD /* FJLiveCameraViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +64,7 @@
 		3054F32A1AFE516800B47F51 /* RestKitObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestKitObjC.h; sourceTree = "<group>"; };
 		3054F32B1AFE51C300B47F51 /* UserApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApiModel.swift; sourceTree = "<group>"; };
 		30E030A11AFE6E1D00EB1FEF /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		30E030A61AFEB29E00EB1FEF /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		47A50C0BA07F8CFD52D30073 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		70A5E7535BA0C31A438E84CE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8710181E1A841928000CEDBD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,8 +80,6 @@
 		8710182E1A841928000CEDBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8710182F1A841928000CEDBD /* UIImage+OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+OpenCV.h"; sourceTree = "<group>"; };
 		871018301A841928000CEDBD /* UIImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+OpenCV.mm"; sourceTree = "<group>"; };
-		871018311A841928000CEDBD /* FJLiveCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJLiveCameraViewController.h; sourceTree = "<group>"; };
-		871018321A841928000CEDBD /* FJLiveCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FJLiveCameraViewController.m; sourceTree = "<group>"; };
 		872C48E71A69251A001BD610 /* opencv-facerec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "opencv-facerec.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF45A0F0FD4B4534D50EC770 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +165,7 @@
 		871018401A841936000CEDBD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3054BB5E1AFE140E00094B0B /* opencv-facerec-Bridging-Header.h */,
 				871018201A841928000CEDBD /* LaunchScreen.xib */,
 				8710182A1A841928000CEDBD /* haarcascade_eye_tree_eyeglasses.xml */,
 				8710182B1A841928000CEDBD /* haarcascade_frontalface_alt2.xml */,
@@ -190,10 +190,8 @@
 			isa = PBXGroup;
 			children = (
 				871018221A841928000CEDBD /* Main.storyboard */,
-				871018311A841928000CEDBD /* FJLiveCameraViewController.h */,
-				871018321A841928000CEDBD /* FJLiveCameraViewController.m */,
 				3054BB5F1AFE140F00094B0B /* MainViewController.swift */,
-				3054BB5E1AFE140E00094B0B /* opencv-facerec-Bridging-Header.h */,
+				30E030A61AFEB29E00EB1FEF /* PhotoCell.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -360,9 +358,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3054BB741AFE3CE700094B0B /* Faces.swift in Sources */,
+				30E030A71AFEB29E00EB1FEF /* PhotoCell.swift in Sources */,
 				3054BB711AFE3BCE00094B0B /* FaceModel.swift in Sources */,
 				3054BB601AFE140F00094B0B /* MainViewController.swift in Sources */,
-				8710183F1A841928000CEDBD /* FJLiveCameraViewController.m in Sources */,
 				3054BB661AFE2A1300094B0B /* FJFaceRecognizer.mm in Sources */,
 				3054BB631AFE18CC00094B0B /* RACSwift.swift in Sources */,
 				3054F32C1AFE51C300B47F51 /* UserApiModel.swift in Sources */,

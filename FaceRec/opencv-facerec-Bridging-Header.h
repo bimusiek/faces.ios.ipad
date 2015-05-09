@@ -7,3 +7,4 @@
 #import <ReactiveCocoa.h>
 #import <RestKit.h>
 #import "RestKitObjC.h"
+#import <iCarousel.h>

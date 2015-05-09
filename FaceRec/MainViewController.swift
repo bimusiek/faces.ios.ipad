@@ -12,8 +12,8 @@ import UIKit
 enum FaceDetectionState {
     case NotRecognized, GotFace, TooManyFaces;
 }
-
-class MainViewController:UIViewController {
+@objc
+class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegate {
     @IBOutlet weak var cameraView: UIImageView!
     @IBOutlet weak var faceView: UIImageView!
     @IBOutlet weak var confidenceLabel: UILabel!
@@ -21,8 +21,13 @@ class MainViewController:UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var advertLabel: UILabel!
     
+    @IBOutlet weak var productNameLabel: UILabel!
     
+    @IBOutlet weak var productDescriptionLabel: UILabel!
+    
+    @IBOutlet weak var carousel: iCarousel!
     @IBOutlet weak var faceLoadingIndicator: UIActivityIndicatorView!
+    
     
     var faceDetector:FJFaceDetector!
     var faceRecognizer:FJFaceRecognizer!
@@ -39,6 +44,10 @@ class MainViewController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.carousel.dataSource = self
+        self.carousel.delegate = self
+        self.carousel.type = .Rotary
+        
         self.faceRecognizer = FJFaceRecognizer()
         
         self.faceDetector = FJFaceDetector(cameraView: self.cameraView, scale: 2.0)
@@ -199,4 +208,63 @@ class MainViewController:UIViewController {
         }
         
     }
+    
+    // MARK - iCarousel
+    
+    func numberOfItemsInCarousel(carousel: iCarousel!) -> Int
+    {
+        return 3
+    }
+    
+    @objc
+    func carousel(carousel: iCarousel!, viewForItemAtIndex index: Int, reusingView viewM: UIView!) -> UIView!
+    {
+        var label: UILabel! = nil
+        var view = viewM
+        
+        //create new view if no view is available for recycling
+        if (view == nil)
+        {
+            //don't do anything specific to the index within
+            //this `if (view == nil) {...}` statement because the view will be
+            //recycled and used with other index values later
+            let width = self.carousel.bounds.size.width - 150;
+            let height = self.carousel.bounds.size.height - 100;
+            view = UIImageView(frame:CGRectMake(0, 0, width, height))
+            view.contentMode = UIViewContentMode.ScaleAspectFit
+            view.clipsToBounds = true;
+            (view as! UIImageView!).image = UIImage(named: "page.png")
+
+            label = UILabel(frame:view.bounds)
+            label.backgroundColor = UIColor.clearColor()
+            label.textAlignment = .Center
+            label.font = label.font.fontWithSize(50)
+            label.tag = 1
+            view.addSubview(label)
+        }
+        else
+        {
+            //get a reference to the label in the recycled view
+            label = view.viewWithTag(1) as! UILabel!
+        }
+        
+        //set item label
+        //remember to always set any properties of your carousel item
+        //views outside of the `if (view == nil) {...}` check otherwise
+        //you'll get weird issues with carousel item content appearing
+        //in the wrong place in the carousel
+        label.text = "2"
+        
+        return view
+    }
+    
+    func carousel(carousel: iCarousel!, valueForOption option: iCarouselOption, withDefault value: CGFloat) -> CGFloat
+    {
+        if (option == .Spacing)
+        {
+            return value * 1.1
+        }
+        return value
+    }
+    
 }
