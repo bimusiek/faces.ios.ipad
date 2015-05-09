@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Realm
 
 class FaceIdentifierModel:RLMObject {
     var identifier:String = ""
@@ -16,9 +17,9 @@ class FaceIdentifierModel:RLMObject {
 }
 
 class FaceModel:RLMObject {
-    var identifiers = RLMArray(objectClassName: FaceIdentifierModel.className())
-    var faceId:String = ""
-    var facebookImage = ""
+    dynamic var identifiers = RLMArray(objectClassName: FaceIdentifierModel.className())
+    dynamic var faceId:String = ""
+    dynamic var facebookImage = ""
     
     class func get(identifier:String) -> FaceModel? {
         return FaceModel.objectsWhere("faceId = %@", identifier).lastObject() as? FaceModel

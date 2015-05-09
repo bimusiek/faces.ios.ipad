@@ -18,6 +18,8 @@ class MainViewController:UIViewController {
     @IBOutlet weak var faceView: UIImageView!
     @IBOutlet weak var confidenceLabel: UILabel!
     
+    @IBOutlet weak var faceLoadingIndicator: UIActivityIndicatorView!
+    
     var faceDetector:FJFaceDetector!
     var faceRecognizer:FJFaceRecognizer!
 
@@ -44,6 +46,10 @@ class MainViewController:UIViewController {
             return self.faceDetector.detectedFaces().count > 0
         }.throttle(5).subscribeNext { (_) -> Void in
             self.state = .NotRecognized
+        }
+        
+        RACObserve(self, "processingNewPerson").subscribeNext { (_) -> Void in
+            self.stateWasUpdated()
         }
 
     }    
@@ -103,9 +109,12 @@ class MainViewController:UIViewController {
             self.cameraView.hidden = true;
             self.faceView.hidden = false;
         }
+        
+        self.faceLoadingIndicator.hidden = !self.processingNewPerson
     }
     
-    var processingLastConfidence = false;
+    dynamic var processingLastConfidence = false;
+    dynamic var processingNewPerson = false;
     func checkConfidence(face:UIImage) {
         if self.processingLastConfidence {
             return
@@ -116,11 +125,11 @@ class MainViewController:UIViewController {
             
             var confidence:Double = 0;
             var identifier:String!
-            var finish:(identifier:String)->() = { (identifier) -> Void in
-            }
             
             if self.faceRecognizer.labels().count <= 0 {
+                self.processingNewPerson = true
                 self.createPerson(face, callback: { (faceId) -> () in
+                    self.processingNewPerson = false
                     self.gotFaceModel(faceId)
                 })
             } else {
@@ -130,30 +139,30 @@ class MainViewController:UIViewController {
         });
     }
     
-    func createPerson(face:UIImage, callback:(faceId:String)->()) {
+    func createPerson(face:UIImage, callback:(face:FaceModel)->()) {
         var identifier = self.nameForPerson()
         self.faceRecognizer.updateWithFace(face, name: identifier)
-        Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (faceId) -> () in
-            callback(faceId: faceId)
+        Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
+            callback(face: face)
         })
     }
     
     func confidenceFound(confidence:Double, face:UIImage, var identifier:String) {
         if confidence > 150 {
-            self.createPerson(face, callback:{ (faceId) -> () in
-                self.gotFaceModel(faceId)
+            self.createPerson(face, callback:{ (face) -> () in
+                self.gotFaceModel(face)
             })
         } else {
-            Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (faceId) -> () in
-                self.gotFaceModel(faceId)
+            Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
+                self.gotFaceModel(face)
             })
         }
     }
     
-    func gotFaceModel(faceId:String) {
-        self.confidenceLabel.text = "Face: \(faceId)"
+    func gotFaceModel(face:FaceModel) {
+        self.currentPerson = face
+        self.confidenceLabel.text = "Face: \(face.faceId)"
         self.processingLastConfidence = false;
-        self.currentPerson = FaceModel.get(faceId)
         self.state = .GotFace
         
     }

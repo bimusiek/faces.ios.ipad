@@ -17,6 +17,9 @@
 		3054BB6E1AFE3B4F00094B0B /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB6D1AFE3B4F00094B0B /* RLMSupport.swift */; };
 		3054BB711AFE3BCE00094B0B /* FaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB701AFE3BCE00094B0B /* FaceModel.swift */; };
 		3054BB741AFE3CE700094B0B /* Faces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB731AFE3CE700094B0B /* Faces.swift */; };
+		3054BB771AFE508F00094B0B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB761AFE508F00094B0B /* API.swift */; };
+		3054F3291AFE512D00B47F51 /* RestKitObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3054F3281AFE512D00B47F51 /* RestKitObjC.m */; };
+		3054F32C1AFE51C300B47F51 /* UserApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054F32B1AFE51C300B47F51 /* UserApiModel.swift */; };
 		871018331A841928000CEDBD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8710181F1A841928000CEDBD /* AppDelegate.m */; };
 		871018341A841928000CEDBD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 871018201A841928000CEDBD /* LaunchScreen.xib */; };
 		871018351A841928000CEDBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 871018221A841928000CEDBD /* Main.storyboard */; };
@@ -42,6 +45,10 @@
 		3054BB6D1AFE3B4F00094B0B /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		3054BB701AFE3BCE00094B0B /* FaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceModel.swift; sourceTree = "<group>"; };
 		3054BB731AFE3CE700094B0B /* Faces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Faces.swift; sourceTree = "<group>"; };
+		3054BB761AFE508F00094B0B /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		3054F3281AFE512D00B47F51 /* RestKitObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestKitObjC.m; sourceTree = "<group>"; };
+		3054F32A1AFE516800B47F51 /* RestKitObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestKitObjC.h; sourceTree = "<group>"; };
+		3054F32B1AFE51C300B47F51 /* UserApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApiModel.swift; sourceTree = "<group>"; };
 		47A50C0BA07F8CFD52D30073 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		70A5E7535BA0C31A438E84CE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8710181E1A841928000CEDBD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -112,9 +119,21 @@
 			name = Stores;
 			sourceTree = "<group>";
 		};
+		3054BB751AFE508900094B0B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				3054BB761AFE508F00094B0B /* API.swift */,
+				3054F3281AFE512D00B47F51 /* RestKitObjC.m */,
+				3054F32A1AFE516800B47F51 /* RestKitObjC.h */,
+				3054F32B1AFE51C300B47F51 /* UserApiModel.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		8710181D1A841928000CEDBD /* FaceRec */ = {
 			isa = PBXGroup;
 			children = (
+				3054BB751AFE508900094B0B /* API */,
 				3054BB721AFE3CDD00094B0B /* Stores */,
 				3054BB6F1AFE3BBD00094B0B /* Models */,
 				3054BB611AFE18AA00094B0B /* Helpers */,
@@ -316,9 +335,12 @@
 				8710183F1A841928000CEDBD /* FJLiveCameraViewController.m in Sources */,
 				3054BB661AFE2A1300094B0B /* FJFaceRecognizer.mm in Sources */,
 				3054BB631AFE18CC00094B0B /* RACSwift.swift in Sources */,
+				3054F32C1AFE51C300B47F51 /* UserApiModel.swift in Sources */,
 				8710183D1A841928000CEDBD /* main.m in Sources */,
 				871018361A841928000CEDBD /* FJFaceDetector.mm in Sources */,
+				3054BB771AFE508F00094B0B /* API.swift in Sources */,
 				3054BB681AFE362500094B0B /* Person.swift in Sources */,
+				3054F3291AFE512D00B47F51 /* RestKitObjC.m in Sources */,
 				3054BB6E1AFE3B4F00094B0B /* RLMSupport.swift in Sources */,
 				8710183E1A841928000CEDBD /* UIImage+OpenCV.mm in Sources */,
 				871018331A841928000CEDBD /* AppDelegate.m in Sources */,

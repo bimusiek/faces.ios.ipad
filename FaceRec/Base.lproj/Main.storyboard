@@ -36,6 +36,9 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="gU4-Fr-bNM">
+                                        <rect key="frame" x="40" y="40" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.4941176471" green="0.30196078430000001" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -43,7 +46,9 @@
                                     <constraint firstAttribute="trailing" secondItem="jNX-9r-1LQ" secondAttribute="trailing" constant="10" id="Cum-bc-iZb"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="centerX" secondItem="GdF-VZ-f1b" secondAttribute="centerX" id="DZv-Ul-dyA"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="top" secondItem="JXD-Y4-vXY" secondAttribute="top" constant="10" id="DvN-3S-hSi"/>
+                                    <constraint firstItem="gU4-Fr-bNM" firstAttribute="centerX" secondItem="GdF-VZ-f1b" secondAttribute="centerX" id="IZe-oT-Xm7"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="width" secondItem="GdF-VZ-f1b" secondAttribute="width" id="MEU-H4-xzL"/>
+                                    <constraint firstItem="gU4-Fr-bNM" firstAttribute="centerY" secondItem="GdF-VZ-f1b" secondAttribute="centerY" id="Okg-sH-vI2"/>
                                     <constraint firstAttribute="centerY" secondItem="jNX-9r-1LQ" secondAttribute="centerY" id="PFn-B7-1Za"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="leading" secondItem="JXD-Y4-vXY" secondAttribute="leading" constant="10" id="SQd-Hu-UqI"/>
                                     <constraint firstItem="thZ-41-ptk" firstAttribute="height" secondItem="GdF-VZ-f1b" secondAttribute="height" id="pxc-g3-rUf"/>
@@ -64,6 +69,7 @@
                     <connections>
                         <outlet property="cameraView" destination="thZ-41-ptk" id="Q9t-2b-t8I"/>
                         <outlet property="confidenceLabel" destination="jNX-9r-1LQ" id="HW7-We-1tg"/>
+                        <outlet property="faceLoadingIndicator" destination="gU4-Fr-bNM" id="Z8d-dW-KbA"/>
                         <outlet property="faceView" destination="GdF-VZ-f1b" id="U44-hl-VRc"/>
                     </connections>
                 </viewController>

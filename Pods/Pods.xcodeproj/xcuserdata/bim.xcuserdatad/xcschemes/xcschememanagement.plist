@@ -4,7 +4,37 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ISO8601DateFormatterValueTransformer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-RKValueTransformers.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ReactiveCocoa.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-RestKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SOCKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TransitionKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1F28A73F597F6918AD2562C4</key>
+		<key>04CC11DBF0525953B81DAE8C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>236EA9297E7D2C66984E96DE</key>
+		<key>27C11005DAC70CC824A1B504</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>42FCDA0A26355E56BD427B26</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5303C404A22CF12FD17521B5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>72A433BC71294226BB9AAFC9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D3EDEDE79C6CB4B5885D0D04</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F44B6258F42FD0F7071A2F72</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FBC8DCC60F3D473089B40AC7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
