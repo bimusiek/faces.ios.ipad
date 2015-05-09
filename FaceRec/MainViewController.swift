@@ -79,6 +79,7 @@ class MainViewController:UIViewController {
         
         if self.state == .GotFace {
             self.checkConfidence(image)
+            return
         }
 
         if self.facesDetected >= 5 {
@@ -119,8 +120,8 @@ class MainViewController:UIViewController {
             }
             
             if self.faceRecognizer.labels().count <= 0 {
-                self.createPerson(face, callback: { (face) -> () in
-                    self.gotFaceModel(face)
+                self.createPerson(face, callback: { (faceId) -> () in
+                    self.gotFaceModel(faceId)
                 })
             } else {
                 identifier = self.faceRecognizer.predict(face, confidence: &confidence)
@@ -129,29 +130,32 @@ class MainViewController:UIViewController {
         });
     }
     
-    func createPerson(face:UIImage, callback:(face:FaceModel)->()) {
+    func createPerson(face:UIImage, callback:(faceId:String)->()) {
         var identifier = self.nameForPerson()
         self.faceRecognizer.updateWithFace(face, name: identifier)
-        Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: callback)
+        Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (faceId) -> () in
+            callback(faceId: faceId)
+        })
     }
     
     func confidenceFound(confidence:Double, face:UIImage, var identifier:String) {
         if confidence > 150 {
-            self.createPerson(face, callback:{ (face) -> () in
-                self.gotFaceModel(face)
+            self.createPerson(face, callback:{ (faceId) -> () in
+                self.gotFaceModel(faceId)
             })
         } else {
-            Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (face) -> () in
-                self.gotFaceModel(face)
+            Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { (faceId) -> () in
+                self.gotFaceModel(faceId)
             })
         }
     }
     
-    func gotFaceModel(face:FaceModel) {
-        self.currentPerson = face
-        self.confidenceLabel.text = "Face: \(face.id)"
+    func gotFaceModel(faceId:String) {
+        self.confidenceLabel.text = "Face: \(faceId)"
         self.processingLastConfidence = false;
+        self.currentPerson = FaceModel.get(faceId)
         self.state = .GotFace
+        
     }
     
     func nameForPerson() -> String {
@@ -162,7 +166,7 @@ class MainViewController:UIViewController {
         self.cameraView.hidden = true;
         self.faceView.hidden = false;
         
-        if self.lastPerson?.id != self.currentPerson?.id {
+        if self.lastPerson?.faceId != self.currentPerson?.faceId {
             self.lastPerson = self.currentPerson
             
             // Get here

@@ -8,14 +8,19 @@
 
 import Foundation
 
-@objc(FaceIdentifierModel)
 class FaceIdentifierModel:RLMObject {
     var identifier:String = ""
+    var face:FaceModel? {
+        return self.linkingObjectsOfClass(FaceModel.className(), forProperty: "identifiers").last as? FaceModel
+    }
 }
 
-@objc(FaceModel)
 class FaceModel:RLMObject {
     var identifiers = RLMArray(objectClassName: FaceIdentifierModel.className())
-    var id:String = ""
+    var faceId:String = ""
     var facebookImage = ""
+    
+    class func get(identifier:String) -> FaceModel? {
+        return FaceModel.objectsWhere("faceId = %@", identifier).lastObject() as? FaceModel
+    }
 }
