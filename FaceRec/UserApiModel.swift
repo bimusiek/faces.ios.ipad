@@ -15,6 +15,8 @@ class UserApiModel:NSObject {
     var name = ""
     var email = ""
     var avatarUrl = ""
+    var gender = ""
+    var age:Int = 0
     
     class func map(manager:RKObjectManager) {
         manager.addResponseDescriptor(self.responseDescriptor())
@@ -34,6 +36,8 @@ class UserApiModel:NSObject {
             "name": "name",
             "email": "email",
             "avatar": "avatarUrl",
+            "age": "age",
+            "gender": "gender"
             ])
         return mapping
     }

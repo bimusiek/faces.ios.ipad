@@ -48,8 +48,16 @@ class API:NSObject {
     }
     
     
-    func getProduct(userId:Int?, success:(product:ProductApiModel)->(), failure:()->()) {
-        self.manager.postObject(nil, path: "products/recommendation/", parameters: [:], success: { (operation, result) -> Void in
+    func getProduct(face:FaceModel?, success:(product:ProductApiModel)->(), failure:()->()) {
+        var queryString = ""
+        if let person = face {
+            if person.userId == 0 {
+                queryString = "?age=\(person.age)&gender=\(person.gender)"
+            } else {
+                queryString = "?user_id=\(person.userId)"
+            }
+        }
+        self.manager.postObject(nil, path: "products/recommendation/\(queryString)", parameters: [:], success: { (operation, result) -> Void in
             if let product = result.firstObject as? ProductApiModel {
                 self.downloadAllImages(product.images, callback: {
                     success(product: product)

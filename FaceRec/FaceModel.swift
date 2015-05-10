@@ -21,9 +21,12 @@ class FaceModel:Object {
     
     dynamic var identifiers = List<FaceIdentifierModel>()
     dynamic var faceId:String = ""
+    dynamic var userId = 0
     dynamic var imagePath = ""
     dynamic var name = ""
     dynamic var email = ""
+    dynamic var gender = ""
+    dynamic var age = 0
     
     class func get(identifier:String) -> FaceModel? {
         return Realm().objects(FaceModel).filter("faceId = %@", identifier).last
@@ -55,6 +58,9 @@ class FaceModel:Object {
         face.name = user.name
         face.email = user.email
         face.faceId = "\(user.userId)"
+        face.gender = user.gender
+        face.age = user.age
+        face.userId = user.userId
         return face
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class Faces {
-    class func getOrCreateByIdentifier(image:UIImage, identifier:String, callback:(face:FaceModel)->()) {
+    class func getOrCreateByIdentifier(image:UIImage, identifier:String, callback:(face:FaceModel)->(), fail:()->()) {
         var firstResult:FaceModel?
         autoreleasepool {
             let identifierResults = Realm().objects(FaceIdentifierModel).filter("identifier = %@", identifier)
@@ -25,8 +25,12 @@ class Faces {
         if firstResult == nil {
             self.getOrCreateFace(image, identifier:identifier, callback: { (faceId) -> () in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    let face = FaceModel.get(faceId)!
-                    callback(face: face)
+                    if faceId.isEmpty {
+                        fail()
+                    } else {
+                        let face = FaceModel.get(faceId)!
+                        callback(face: face)
+                    }
                 })
             })
         } else {
@@ -49,37 +53,43 @@ class Faces {
     class func getOrCreateFace(var image:UIImage, identifier:String, callback:(faceId:String)->()) {
         API.sharedInstance.detect(image, success: { (user) -> () in
             dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
-                if let userImage = user.downloadImage() {
-                    image = userImage
-                }
-                let faceIdentifier = FaceIdentifierModel()
-                faceIdentifier.identifier = identifier
-                
-                let face = FaceModel.createFromUser(user)
-                face.identifiers.append(faceIdentifier)
-                
-                autoreleasepool {
-                    let realm = Realm();
-                    realm.write {
-                        face.imagePath = self.saveImage(image, identifier:identifier)
-                        realm.add(face)
+                if user.userId == 0 {
+                    
+                    let face = FaceModel.getNotRecognizedFace()
+                    let faceIdentifier = FaceIdentifierModel()
+                    faceIdentifier.identifier = identifier
+                    autoreleasepool {
+                        Realm().write {
+                            face.imagePath = self.saveImage(image, identifier:identifier)
+                            face.identifiers.append(faceIdentifier)
+                        }
                     }
+                    callback(faceId: face.faceId)
+
+                } else {
+                    if let userImage = user.downloadImage() {
+                        image = userImage
+                    }
+                    let faceIdentifier = FaceIdentifierModel()
+                    faceIdentifier.identifier = identifier
+                    
+                    let face = FaceModel.createFromUser(user)
+                    face.identifiers.append(faceIdentifier)
+                    
+                    autoreleasepool {
+                        let realm = Realm();
+                        realm.write {
+                            face.imagePath = self.saveImage(image, identifier:identifier)
+                            realm.add(face)
+                        }
+                    }
+                    callback(faceId: face.faceId)
                 }
-                callback(faceId: face.faceId)
             })
 
         }) { (error) -> () in
             dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
-                let face = FaceModel.getNotRecognizedFace()
-                let faceIdentifier = FaceIdentifierModel()
-                faceIdentifier.identifier = identifier
-                autoreleasepool {
-                    Realm().write {
-                        face.imagePath = self.saveImage(image, identifier:identifier)
-                        face.identifiers.append(faceIdentifier)
-                    }
-                }
-                callback(faceId: face.faceId)
+                callback(faceId: "")
             })
         }
     }

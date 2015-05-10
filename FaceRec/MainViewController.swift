@@ -222,6 +222,12 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         self.faceRecognizer.updateWithFace(grayFace, name: identifier)
         Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { [weak self] (face) -> () in
             callback(face: face)
+            }, fail: {
+                objc_sync_enter(face)
+                self.processingLastConfidence = false;
+                objc_sync_exit(face)
+                self.state = .NotRecognized
+                
         })
     }
     
@@ -233,7 +239,12 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         } else {
             Faces.getOrCreateByIdentifier(face, identifier: identifier, callback: { [weak self] (face) -> () in
                 self?.gotFaceModel(face)
-            })
+                }, fail: {
+                    objc_sync_enter(face)
+                    self.processingLastConfidence = false;
+                    objc_sync_exit(face)
+                    self.state = .NotRecognized
+                })
         }
     }
     
@@ -252,6 +263,7 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         
         if self.lastPerson?.faceId != self.currentPerson?.faceId {
             self.lastPerson = self.currentPerson
+            self.reloadProductTotally()
         }
         self.faceView.image = self.currentPerson?.getImage()
         if let currentPerson = self.currentPerson {
@@ -326,7 +338,7 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
     dynamic var nextProduct:ProductApiModel?
     func downloadNextProduct() {
         NSLog("Get next product")
-        API.sharedInstance.getProduct(nil, success:{ (product) -> () in
+        API.sharedInstance.getProduct(self.currentPerson, success:{ (product) -> () in
             self.nextProduct = product
             }, failure:{ () -> () in
                 
@@ -334,4 +346,8 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         
     }
     
+    func reloadProductTotally() {
+        self.currentProduct = nil
+        self.downloadNextProduct()
+    }
 }

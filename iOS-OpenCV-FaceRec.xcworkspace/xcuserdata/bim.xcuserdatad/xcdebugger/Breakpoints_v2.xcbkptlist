@@ -6,17 +6,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FaceRec/UserApiModel.swift"
-            timestampString = "452898695.702623"
+            timestampString = "452910444.117572"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "downloadImage()"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceRec/API.swift"
+            timestampString = "452910737.863685"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "getProduct(_:success:failure:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "opencv_facerec.API.(getProduct (opencv_facerec.API) -&gt; (Swift.Optional&lt;opencv_facerec.FaceModel&gt;, success : (product : opencv_facerec.ProductApiModel) -&gt; (), failure : () -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "opencv-facerec"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bim/Developer/Faces-ecomm/ios/FaceRec/API.swift"
+                  timestampString = "452910737.907796"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "376">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "opencv_facerec.API.(getProduct (opencv_facerec.API) -&gt; (Swift.Optional&lt;opencv_facerec.FaceModel&gt;, success : (product : opencv_facerec.ProductApiModel) -&gt; (), failure : () -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "opencv-facerec"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bim/Developer/Faces-ecomm/ios/FaceRec/API.swift"
+                  timestampString = "452910737.90813"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
