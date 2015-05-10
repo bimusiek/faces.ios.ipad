@@ -28,6 +28,7 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
     @IBOutlet weak var carousel: iCarousel!
     @IBOutlet weak var faceLoadingIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var priceLabel: UILabel!
     
     @IBOutlet weak var progressView: MRCircularProgressView!
     var faceDetector:FJFaceDetector!
@@ -277,6 +278,7 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         carousel.reloadData()
         self.productNameLabel.text = self.currentProduct?.name
         self.productDescriptionLabel.text = self.currentProduct?.brand
+        self.priceLabel.text = "\(self.currentProduct!.price) €"
     }
     
     func nextOne() {
