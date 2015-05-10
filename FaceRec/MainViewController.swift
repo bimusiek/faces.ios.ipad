@@ -44,8 +44,9 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
     }
     
     var progress:Float = 0
-    var initialProgress:Float = 20.0;
+    var initialProgress:Float = 10.0;
     
+    var timer:NSTimer!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,10 +54,9 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         self.progressView.borderWidth = 1.0
         self.progressView.lineWidth = 6.0
         self.progressView.valueLabel.hidden = true
-        self.progress = self.initialProgress;
-        self.progressView.progress = self.progress/self.initialProgress;
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("timerUpdated"), userInfo: nil, repeats: true)
+        
+
 
         
         self.carousel.dataSource = self
@@ -83,13 +83,48 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
             })
         }
 
-    }    
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    func creatTimer() {
+        if self.timer != nil {
+            self.timer.invalidate()
+            self.timer = nil;
+        }
+        self.progress = self.initialProgress;
+        self.progressView.progress = self.progress/self.initialProgress;
+        
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("timerUpdate"), userInfo: nil, repeats: true)
+    }
+    func switchToNextProduct() {
+        self.currentProduct = self.nextProduct;
+        self.nextProduct = nil;
+    }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.faceDetector.startCapture()
         
         self.cameraView.hidden = false;
         self.faceView.hidden = true;
+        
+        RACObserve(self, "nextProduct").deliverOnMainThread().distinctUntilChanged().subscribeNext { (_) -> Void in
+            if(self.nextProduct != nil && self.currentProduct == nil) {
+                self.switchToNextProduct()
+            } else if self.nextProduct == nil {
+                self.downloadNextProduct()
+            }
+        }
+        SVProgressHUD.show()
+        RACObserve(self, "currentProduct").deliverOnMainThread().subscribeNext { (_) -> Void in
+            if self.currentProduct != nil {
+                self.creatTimer()
+                SVProgressHUD.dismiss()
+                self.reloadData()
+            }
+        }
         
     }
     override func viewWillDisappear(animated: Bool) {
@@ -228,7 +263,8 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
     // MARK - iCarousel
     func reloadData() {
         carousel.reloadData()
-        
+        self.productNameLabel.text = self.currentProduct?.name
+        self.productDescriptionLabel.text = self.currentProduct?.brand
     }
     
     func nextOne() {
@@ -242,7 +278,7 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
     
     func numberOfItemsInCarousel(carousel: iCarousel!) -> Int
     {
-        return 3
+        return self.currentProduct?.images.count ?? 0
     }
     
     @objc
@@ -262,27 +298,9 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
             view = UIImageView(frame:CGRectMake(0, 0, width, height))
             view.contentMode = UIViewContentMode.ScaleAspectFit
             view.clipsToBounds = true;
-            (view as! UIImageView!).image = UIImage(named: "page.png")
-
-            label = UILabel(frame:view.bounds)
-            label.backgroundColor = UIColor.clearColor()
-            label.textAlignment = .Center
-            label.font = label.font.fontWithSize(50)
-            label.tag = 1
-            view.addSubview(label)
         }
-        else
-        {
-            //get a reference to the label in the recycled view
-            label = view.viewWithTag(1) as! UILabel!
-        }
+        (view as! UIImageView!).image = self.currentProduct?.images[index].image
         
-        //set item label
-        //remember to always set any properties of your carousel item
-        //views outside of the `if (view == nil) {...}` check otherwise
-        //you'll get weird issues with carousel item content appearing
-        //in the wrong place in the carousel
-        label.text = "2"
         
         return view
     }
@@ -296,12 +314,24 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         return value
     }
     
-    func timerUpdated() {
+    func timerUpdate() {
         self.progress -= 1;
         if self.progress < 0 {
-            self.progress = self.initialProgress
+            self.switchToNextProduct()
         }
         self.progressView.setProgress(self.progress/self.initialProgress, animated: true)
+    }
+    
+    dynamic var currentProduct:ProductApiModel?
+    dynamic var nextProduct:ProductApiModel?
+    func downloadNextProduct() {
+        NSLog("Get next product")
+        API.sharedInstance.getProduct(nil, success:{ (product) -> () in
+            self.nextProduct = product
+            }, failure:{ () -> () in
+                
+        })
+        
     }
     
 }

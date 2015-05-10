@@ -9,3 +9,4 @@
 #import "RestKitObjC.h"
 #import <iCarousel.h>
 #import <MRProgress.h>
+#import <SVProgressHud.h>

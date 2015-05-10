@@ -19,6 +19,7 @@ class API:NSObject {
         manager.HTTPClient.parameterEncoding = AFJSONParameterEncoding
         RestKitObjC.initLogging()
         
+        ProductApiModel.map(manager)
         UserApiModel.map(manager)
         
         return manager
@@ -46,4 +47,32 @@ class API:NSObject {
         self.manager.enqueueObjectRequestOperation(operation)
     }
     
+    
+    func getProduct(userId:Int?, success:(product:ProductApiModel)->(), failure:()->()) {
+        self.manager.postObject(nil, path: "products/recommendation/", parameters: [:], success: { (operation, result) -> Void in
+            if let product = result.firstObject as? ProductApiModel {
+                self.downloadAllImages(product.images, callback: {
+                    success(product: product)
+                })
+            }
+            
+        }) { (operation, error) -> Void in
+            
+        }
+    }
+    
+    func downloadAllImages(images:[ImageApiModel], callback:()->()) {
+        let group = dispatch_group_create()
+        let queue = dispatch_get_global_queue(0,0)
+        for image in images {
+            dispatch_group_enter(group)
+            dispatch_async(queue, { () -> Void in
+                image.downloadImage()
+                dispatch_group_leave(group)
+            })
+        }
+        dispatch_group_notify(group, queue) { () -> Void in
+            callback()
+        }
+    }
 }

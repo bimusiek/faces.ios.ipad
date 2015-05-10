@@ -157,6 +157,12 @@
 #define COCOAPODS_VERSION_MINOR_SOCKit 1
 #define COCOAPODS_VERSION_PATCH_SOCKit 0
 
+// SVProgressHud
+#define COCOAPODS_POD_AVAILABLE_SVProgressHud
+#define COCOAPODS_VERSION_MAJOR_SVProgressHud 1
+#define COCOAPODS_VERSION_MINOR_SVProgressHud 1
+#define COCOAPODS_VERSION_PATCH_SVProgressHud 3
+
 // TransitionKit
 #define COCOAPODS_POD_AVAILABLE_TransitionKit
 #define COCOAPODS_VERSION_MAJOR_TransitionKit 2

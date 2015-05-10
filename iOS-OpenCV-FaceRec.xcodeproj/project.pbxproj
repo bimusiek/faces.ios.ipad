@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B3EDF519E0775A91EF5568C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A5E7535BA0C31A438E84CE /* libPods.a */; };
+		302A1B2A1AFECCED0091A7E5 /* ProductApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302A1B291AFECCED0091A7E5 /* ProductApiModel.swift */; };
 		3054BB601AFE140F00094B0B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB5F1AFE140F00094B0B /* MainViewController.swift */; };
 		3054BB631AFE18CC00094B0B /* RACSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB621AFE18CC00094B0B /* RACSwift.swift */; };
 		3054BB661AFE2A1300094B0B /* FJFaceRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3054BB651AFE2A1300094B0B /* FJFaceRecognizer.mm */; };
@@ -49,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		302A1B291AFECCED0091A7E5 /* ProductApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductApiModel.swift; sourceTree = "<group>"; };
 		3054BB5E1AFE140E00094B0B /* opencv-facerec-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "opencv-facerec-Bridging-Header.h"; sourceTree = "<group>"; };
 		3054BB5F1AFE140F00094B0B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3054BB621AFE18CC00094B0B /* RACSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACSwift.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				3054F3281AFE512D00B47F51 /* RestKitObjC.m */,
 				3054F32A1AFE516800B47F51 /* RestKitObjC.h */,
 				3054F32B1AFE51C300B47F51 /* UserApiModel.swift */,
+				302A1B291AFECCED0091A7E5 /* ProductApiModel.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				3054BB771AFE508F00094B0B /* API.swift in Sources */,
 				3054BB681AFE362500094B0B /* Person.swift in Sources */,
 				3054F3291AFE512D00B47F51 /* RestKitObjC.m in Sources */,
+				302A1B2A1AFECCED0091A7E5 /* ProductApiModel.swift in Sources */,
 				3054BB6E1AFE3B4F00094B0B /* RLMSupport.swift in Sources */,
 				8710183E1A841928000CEDBD /* UIImage+OpenCV.mm in Sources */,
 				871018331A841928000CEDBD /* AppDelegate.m in Sources */,
