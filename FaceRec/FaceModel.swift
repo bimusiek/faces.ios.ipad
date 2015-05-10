@@ -32,13 +32,15 @@ class FaceModel:Object {
         return Realm().objects(FaceModel).filter("faceId = %@", identifier).last
     }
     
-    class func getNotRecognizedFace() -> FaceModel {
+    class func getNotRecognizedFace(user:UserApiModel) -> FaceModel {
         if let face = Realm().objects(FaceModel).filter("faceId = %@", self.UNRECOGNIZED_FACE).last {
             return face
         }
         var face:FaceModel = FaceModel()
         face.name = "stranger"
         face.faceId = self.UNRECOGNIZED_FACE
+        face.gender = user.gender
+        face.age = user.age
         
         let realm = Realm()
         realm.write { () -> Void in

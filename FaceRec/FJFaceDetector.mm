@@ -40,7 +40,7 @@ using namespace cv;
         self.videoCamera = [[CvVideoCamera alloc] initWithParentView:view];
         self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
         self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
-        self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+        self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeRight;
         self.videoCamera.defaultFPS = 30;
         self.videoCamera.grayscaleMode = NO;
         self.videoCamera.delegate = self;

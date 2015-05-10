@@ -55,7 +55,7 @@ class Faces {
             dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
                 if user.userId == 0 {
                     
-                    let face = FaceModel.getNotRecognizedFace()
+                    let face = FaceModel.getNotRecognizedFace(user)
                     let faceIdentifier = FaceIdentifierModel()
                     faceIdentifier.identifier = identifier
                     autoreleasepool {

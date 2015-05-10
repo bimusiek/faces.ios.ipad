@@ -176,7 +176,8 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
             self.cameraView.hidden = false;
             self.faceView.hidden = true;
             self.confidenceLabel.text = "No one in range"
-            self.nameLabel.text = "Hi stranger! Take a look!"
+            self.nameLabel.text = "Hi stranger!"
+            self.advertLabel.text = "Take a look!"
         case .TooManyFaces:
             self.confidenceLabel.text = "Too many faces in front!"
         case .GotFace:
@@ -233,7 +234,7 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
     }
     
     func confidenceFound(confidence:Double, face:UIImage, grayFace:UIImage, var identifier:String) {
-        if confidence > 150 {
+        if confidence > 60 {
             self.createPerson(face, grayFace:grayFace, callback:{ [weak self] (face) -> () in
                 self?.gotFaceModel(face)
             })
@@ -269,6 +270,7 @@ class MainViewController:UIViewController, iCarouselDataSource, iCarouselDelegat
         self.faceView.image = self.currentPerson?.getImage()
         if let currentPerson = self.currentPerson {
             self.nameLabel.text = "Hi \(currentPerson.name)"
+            self.advertLabel.text = "Age: \(currentPerson.age)  Gender: \(currentPerson.gender)"
         }
         
     }
